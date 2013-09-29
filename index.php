@@ -1,7 +1,5 @@
 <?php
 
-print '<p>Hello, world!</p>';
-
 /*
  * require means "include, but if there's a problem stop everything and quit"
  * _once means "if we already included it, don't do it again, just proceed"
@@ -17,5 +15,17 @@ require_once 'db.php';
 function __autoload($class_name) {
   include 'classes/' . $class_name . '.php';
 }
+
+/* panic([$message])
+ * Stop everything we're doing and quit with an optional message.
+ */
+function panic($message = false) {
+  if($message)
+    exit($message);
+  else
+    exit();
+}
+
+print '<p>Hello, world!</p>';
 
 ?>
