@@ -12,6 +12,7 @@
 class Template {
 
   private $file;
+  private $template_vars;
 
   /* __construct($file, $template_vars = false)
    * Outputs the contents of 'html/$file', replacing certain keywords with
@@ -31,13 +32,30 @@ class Template {
     // If someone tries to include some file not in the "html" directory, panic
     if (strstr($file, '..'))
       panic('You can\'t run templates not in the "html" directory.');
+    $this->file = $file;
+    $this->template_vars = $template_vars;
+  }
+
+  /* __get($var)
+   * This function is just so we can call 0-argument methods without using
+   * parentheses, e.g. "$template->html".
+   *
+   * Check out http://php.net/__get if you want to see how it works.
+   */
+  public function __get($var) {
+    return $this->$var();
   }
 
   /* html()
    * Returns the resulting HTML from processing this template.
    */
   public function html() {
-    // todo
+    $html = file_get_contents('html/header.html') . "\n";
+    $html .= file_get_contents('html/' . $this->file) . "\n";
+    $html .= file_get_contents('html/footer.html');
+    foreach ($this->template_vars as $key => $val)
+      $html = str_replace('{' . $key . '}', $val, $html);
+    return $html;
   }
 
 }

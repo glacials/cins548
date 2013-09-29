@@ -26,6 +26,7 @@ function panic($message = false) {
     exit();
 }
 
-print '<p>Hello, world!</p>';
+$template = new Template('index.html');
+print $template->html;
 
 ?>
