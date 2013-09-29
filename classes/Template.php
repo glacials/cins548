@@ -28,7 +28,7 @@ class Template {
    * If $template_vars is not passed (e.g. via "new Template('index.html')")
    * then no replacements are made.
    */
-  public function __construct($file, $template_vars = false) {
+  public function __construct($file, $template_vars = array()) {
     // If someone tries to include some file not in the "html" directory, panic
     if (strstr($file, '..'))
       panic('You can\'t run templates not in the "html" directory.');
