@@ -4,8 +4,8 @@ class Database {
 
   public $connection;
 
-  public function __construct($host, $username, $password, $database) {
-    $this->connection = new mysqli($host, $username, $password, $database);
+  public function __construct() {
+    $this->connection = new mysqli('localhost', 'webapp', 'teamalphacins548webapp', '548webapp');
   }
 
   /* get_user($id)
@@ -14,7 +14,7 @@ class Database {
   public function get_user($id) {
     // TODO: This ain't tested yet
     $user = new User;
-    $statement = $connection->prepare('SELECT id, email, password, gender FROM users WHERE id = ?');
+    $statement = $this->connection->prepare('SELECT id, email, password, gender FROM Users WHERE id = ?');
     $statement->bind_param('d', $id);
     if (!$statement->execute())
       return false;
@@ -37,6 +37,22 @@ class Database {
    */
   public function get_purchases($user) {
   }
+
+  /*
+   * verify_creds($username, $password)
+   * This function will check to see if the username and password are valid.
+   */
+  public function verify_creds($username, $password) {
+	  $statement = $this->connection->prepare('SELECT user_id FROM Users WHERE username = ? AND password_hash = ?');
+	  $statement->bind_param('ss', $username, $password);
+	  if (!$statement->execute())
+		  return false;
+	  $statement->bind_result($id);
+	  $statement->fetch();
+	  $statement->close();
+	  return $id;
+  }
+
 }
 
 ?>

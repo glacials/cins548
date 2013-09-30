@@ -26,6 +26,7 @@ function panic($message = false) {
     exit();
 }
 
+// Testing the login stuff.
 $template = new Template('login.html');
 print $template->html;
 

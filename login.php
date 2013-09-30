@@ -5,6 +5,12 @@
  * other pages. Input will be given via a POST from the login.html template.
  */
 
-$db = new Database('localhost', 'webapp', 'teamalphacins548webapp', '548webapp');
+function __autoload($class_name) {
+	include 'classes/' . $class_name . '.php';
+}
 
+$db = new Database;
+
+$out = $db->verify_creds($_POST['username'],$_POST['password']);
+echo $out
 ?>
