@@ -9,13 +9,16 @@ function __autoload($class_name) {
 	include 'classes/' . $class_name . '.php';
 }
 
+session_start();
+
 $db = new Database;
 
 $out = $db->verify_creds($_POST['username'],$_POST['password']);
 
-if ($out) {
-	echo "TRUE";
-	// create session information here.
+if ($out != NULL) {
+	echo "TRUE\n";
+	$_SESSION['logged_in'] = true;
+	$_SESSION['user_id'] = $out;
 }
 else {
 	// redirect to /index.php ?

@@ -40,12 +40,13 @@ class Database {
 
   /*
    * verify_creds($username, $password)
-   * This function will check to see if the username and password are valid.
+   * This function will check to see if the username and password are valid. Returns
+   * user_id if valid, and FALSE if invalid.
    */
   public function verify_creds($username, $password) {
 	  $password = crypt($password, 'dLp#32A');
 
-	  $statement = $this->connection->prepare('SELECT username FROM Users WHERE username = ? AND password_hash = ?');
+	  $statement = $this->connection->prepare('SELECT user_id FROM Users WHERE username = ? AND password_hash = ?');
 	  $statement->bind_param('ss',$username,$password);
 
 	  if (!$statement->execute())
@@ -55,10 +56,10 @@ class Database {
 	  $statement->fetch();
 	  $statement->close();
 
-	  if ($results != null)
+	  if ($results == null)
 		  return true;
 	  else
-		  return false;;
+		  return $results;
   }
 
 }
