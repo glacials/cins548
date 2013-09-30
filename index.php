@@ -1,11 +1,5 @@
 <?php
 
-/*
- * require means "include, but if there's a problem stop everything and quit"
- * _once means "if we already included it, don't do it again, just proceed"
- */
-require_once 'db.php';
-
 /* __autoload($class_name)
  * Automatically handles includes. When a class is used that PHP doesn't
  * recognize, it automatically calls this function to try to resolve the include
@@ -25,6 +19,8 @@ function panic($message = false) {
   else
     exit();
 }
+
+$db = new Database;
 
 // Testing the login stuff.
 $template = new Template('login.html');
