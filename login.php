@@ -15,13 +15,14 @@ $db = new Database;
 
 $out = $db->verify_creds($_POST['username'],$_POST['password']);
 
-if ($out != NULL) {
-	echo "TRUE\n";
-	$_SESSION['logged_in'] = true;
-	$_SESSION['user_id'] = $out;
+if ($out != false) {
+	// Creds are correct. Create session variables.
+	$_SESSION['user_id'] = $out['user_id'];
+	$_SESSION['is_admin'] = $out['is_admin'];
 }
 else {
-	// redirect to /index.php ?
+	// Creds are incorrect.
+	header('Location: /index.php');
 }
 
 ?>
