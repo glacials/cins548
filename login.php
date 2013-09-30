@@ -12,7 +12,13 @@ function __autoload($class_name) {
 $db = new Database;
 
 $out = $db->verify_creds($_POST['username'],$_POST['password']);
-if ($out == true)
+
+if ($out) {
 	echo "TRUE";
 	// create session information here.
+}
+else {
+	// redirect to /index.php ?
+}
+
 ?>

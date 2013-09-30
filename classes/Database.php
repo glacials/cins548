@@ -43,19 +43,22 @@ class Database {
    * This function will check to see if the username and password are valid.
    */
   public function verify_creds($username, $password) {
-	  // Escape characters here!
-
-	  // Hashing our password (password, salt)
 	  $password = crypt($password, 'dLp#32A');
 
-	  $result = $this->connection->query("SELECT user_id FROM Users WHERE username = '$username' AND password_hash = '$password'");
+	  $statement = $this->connection->prepare('SELECT username FROM Users WHERE username = ? AND password_hash = ?');
+	  $statement->bind_param('ss',$username,$password);
 
-	  $row_count = $result->num_rows;
+	  if (!$statement->execute())
+		  return false;
 
-	  if ($row_count == 1)
+	  $statement->bind_result($results);
+	  $statement->fetch();
+	  $statement->close();
+
+	  if ($results != null)
 		  return true;
 	  else
-		  return false;
+		  return false;;
   }
 
 }
