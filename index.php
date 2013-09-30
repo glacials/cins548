@@ -26,7 +26,7 @@ function panic($message = false) {
     exit();
 }
 
-$template = new Template('index.html');
+$template = new Template('login.html');
 print $template->html;
 
 ?>
