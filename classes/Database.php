@@ -2,7 +2,7 @@
 
 class Database {
 
-  public $connection;
+  private $connection;
 
   public function __construct() {
     $this->connection = new mysqli('localhost', 'webapp', 'teamalphacins548webapp', '548webapp');
