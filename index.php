@@ -23,7 +23,7 @@ function panic($message = false) {
 $db = new Database;
 
 // Testing the login stuff.
-$template = new Template('login.html');
-print $template->html;
+$page = new Page('login.html');
+print $page->html;
 
 ?>
