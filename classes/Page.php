@@ -31,7 +31,7 @@ class Page {
   public function __construct($file, $page_vars = array()) {
     // If someone tries to include some file not in the "html" directory, panic
     if (strstr($file, '..'))
-      panic('You can\'t run pages not in the "html" directory.');
+      Application::panic('You can\'t run pages not in the "html" directory.');
     $this->file = $file;
     $this->page_vars = $page_vars;
   }
