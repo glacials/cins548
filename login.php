@@ -5,9 +5,7 @@
  * other pages. Input will be given via a POST from the login.html page.
  */
 
-function __autoload($class_name) {
-	include 'classes/' . $class_name . '.php';
-}
+require_once 'autoload.php';
 
 session_start();
 
