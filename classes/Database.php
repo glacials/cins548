@@ -47,28 +47,22 @@ class Database {
   public function verify_creds($username, $password) {
 	  $password = crypt($password, 'dLp#32A');
 
-	  $statement = $this->connection->prepare('SELECT user_id, is_admin FROM Users WHERE username = ? AND password_hash = ?');
-	  $statement->bind_param('ss',$username,$password);
+	  $statement = $this->connection->prepare('SELECT user_id FROM Users WHERE username = ? AND password_hash = ?');
+	  $statement->bind_param('ss', $username, $password);
 
 	  if (!$statement->execute())
 		  return false;
 
-	  $statement->bind_result($result_user_id, $result_is_admin);
+	  $statement->bind_result($result_user_id);
+
 	  if($statement->fetch() == NULL) {
 	  	$statement->close();
 		return false;
 	  }
 
 	  $statement->close();
-
-	  // Create array of user_id and is_admin, this will be returned so we can use this data
-	  // for our session variables.
-	  $results = array(
-		  "user_id" => $result_user_id,
-		  "is_admin" => $result_is_admin,
-	  );
-
-	  return $results;
+	  $user_object = $this->get_user($result_user_id);
+	  return $user_object;
   }
 
 }
