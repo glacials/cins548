@@ -13,15 +13,16 @@ class Database {
    */
   public function get_user($id) {
     // TODO: This ain't tested yet
-    $user = new User;
-    $statement = $this->connection->prepare('SELECT id, email, password, gender FROM Users WHERE id = ?');
-    $statement->bind_param('d', $id);
-    if (!$statement->execute())
-      return false;
-    $statement->bind_result($user->id, $user->email, $user->password, $user->gender);
-    $statement->fetch();
-    $statement->close();
-    return $user;
+    $statement = $this->connection->prepare('SELECT user_id, username, password_hash, is_admin, gender FROM Users WHERE user_id = ?');
+    if ($statement->execute(array($id))) {
+      $row = $statement->fetch();
+      return new User($row['user_id'],
+                      $row['username'],
+                      $row['password_hash'],
+                      $row['is_admin'],
+                      $row['gender']);
+    }
+    return false;
   }
 
   /* get_item($id)
