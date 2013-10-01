@@ -22,6 +22,14 @@ class User {
 		else
 			return false;
 	}
+
+  /*
+   * Saves the current user to the database. If this is a new user, runs an
+   * insert. If it's an existing user, runs an update.
+   */
+  public function save() {
+    //todo
+  }
 }
 
 ?>
