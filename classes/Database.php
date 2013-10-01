@@ -53,7 +53,11 @@ class Database {
 		  return false;
 
 	  $statement->bind_result($result_user_id, $result_is_admin);
-	  $statement->fetch();
+	  if($statement->fetch() == NULL) {
+	  	$statement->close();
+		return false;
+	  }
+
 	  $statement->close();
 
 	  // Create array of user_id and is_admin, this will be returned so we can use this data
@@ -63,10 +67,7 @@ class Database {
 		  "is_admin" => $result_is_admin,
 	  );
 
-	  if ($result_user_id == NULL or $result_is_admin == NULL)
-		  return false;
-	  else
-		  return $results;
+	  return $results;
   }
 
 }
