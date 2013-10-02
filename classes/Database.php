@@ -64,9 +64,27 @@ class Database {
   /* get_purchases($user)
    * Returns an array of all Purchase objects belonging to user $user. $user can
    * be a User object or a user ID. If it's an ID and a user with that ID
-   * doesn't exist, returns false.
+   * doesn't exist, returns false. This function can be called from within the User class.
    */
-  public function get_purchases($user) {
+  public function get_purchases($user_id) {
+	  // TODO: Not tested yet.
+	  $statement = $this->connection->prepare('SELECT purchase_id, user_id, item_id, purchase_date FROM Purchases WHERE user_id = ?');
+	  $statement->bind_param('i',$user_id);
+	  if ($statement->execute())
+		  return false;
+	  $statement->bind_results($returned_purchase_id, $returned_user_id, $returned_item_id, $returned_purchase_date);
+
+	  $array_of_puchases = new array();
+
+	  while ($statement->fetch()) {
+		  $item = new Purchase($returned_purchase_id, $returned_user_id, $returned_item_id, $returned_purchase_date);
+		  $array_of_purchases[] = $item;
+	  }
+
+	  // If there are no purchases in the the results, return false
+	  if (empty($array_of_purchases))
+		  return false;
+	  return $array_of_purchases;
   }
 
   /*
