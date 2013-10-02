@@ -25,11 +25,23 @@ class Database {
     return false;
   }
 
-  /* user_exists($user) {
-   * Will take a user object as input, and check to see if that user exists in the database already,
+  /* is_new_user($user) {
+   * Will take a user object as input, and check to see if that user exists in the database already.
+   * It will use the username to check and see if it already exists in the database.
    * Useful when adding NEW users to webapp.
    */
-  public function does_user_exist($user) {
+  public function is_new_user($user_obj) {
+	  // get username.
+	  // check against database.
+	  // return t/f. 
+	  $statement = $this->connection->prepare('SELECT username FROM Users WHERE username = ?');
+	  $statement->bind_param('s', $user_obj->get_username());
+	  if ($statement->execute())
+		  return false;
+	  $statement->bind_results($result_username);
+	  if ($statement->fetch() == NULL)
+		  return false;
+	  return true;
   }
 
   /* get_item($id)

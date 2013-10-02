@@ -17,10 +17,14 @@ class User {
 	}
 
 	public function is_admin() {
-		if ($is_admin)
+		if ($this->is_admin == 1)
 			return true;
 		else
 			return false;
+	}
+
+	public function get_username() {
+		return $this->username;
 	}
 
   /*
