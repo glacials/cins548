@@ -25,12 +25,12 @@ class Database {
     return false;
   }
 
-  /* user_exists($username) {
+  /* username_exists($username) {
    * Will take a username input, and check to see if that user exists in the database already.
    * It will use the username to check and see if it already exists in the database.
    * Useful when adding NEW users to webapp.
    */
-  public function user_exists($username) {
+  public function username_exists($username) {
 	  // TODO: Not tested yet.
 	  $statement = $this->connection->prepare('SELECT username FROM Users WHERE username = ?');
 	  $statement->bind_param('s', $username);
