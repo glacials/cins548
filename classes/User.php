@@ -32,7 +32,7 @@ class User {
 	 * Will call $db->get_user($user_id) and see if the user already exists in the database
 	 */
 	public function exists() {
-		return $db->get_user($this->user_id);
+		return (bool)$db->get_user($this->user_id);
 	}
 
 	/* purchases();
