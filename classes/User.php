@@ -16,6 +16,10 @@ class User {
 		$this->gender = $Gender;
 	}
 
+	/*
+	 * is_admin();
+	 * Will return if a user is an admin or not.
+	 */
 	public function is_admin() {
 		if ($this->is_admin == 1)
 			return true;
@@ -23,8 +27,12 @@ class User {
 			return false;
 	}
 
-	public function get_username() {
-		return $this->username;
+	/*
+	 * exists();
+	 * Will call $db->get_user($user_id) and see if the user already exists in the database
+	 */
+	public function exists() {
+		return $db->get_user($this->user_id);
 	}
 
   /*

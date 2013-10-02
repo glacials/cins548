@@ -25,22 +25,23 @@ class Database {
     return false;
   }
 
-  /* is_new_user($user) {
-   * Will take a user object as input, and check to see if that user exists in the database already.
+  /* user_exists($username) {
+   * Will take a username input, and check to see if that user exists in the database already.
    * It will use the username to check and see if it already exists in the database.
    * Useful when adding NEW users to webapp.
    */
-  public function is_new_user($user_obj) {
-	  // get username.
-	  // check against database.
-	  // return t/f. 
+  public function user_exists($username) {
+	  // TODO: Not tested yet.
 	  $statement = $this->connection->prepare('SELECT username FROM Users WHERE username = ?');
-	  $statement->bind_param('s', $user_obj->get_username());
+	  $statement->bind_param('s', $username);
 	  if ($statement->execute())
 		  return false;
 	  $statement->bind_results($result_username);
-	  if ($statement->fetch() == NULL)
+	  if ($statement->fetch() == NULL) {
+		  $statement->close();
 		  return false;
+	  }
+	  $statement->close();
 	  return true;
   }
 
@@ -48,6 +49,16 @@ class Database {
    * Returns an Item object with ID $id. If no such item exists, returns false.
    */
   public function get_item($id) {
+	  $statement = $this->connection->prepare('SELECT item_id, item_name, image_url, item_description, item_price FROM Products WHERE item_id = ?');
+	  $statement->bind_param('i',$id);
+	  if ($statement->execute())
+		  return false;
+	  $statement->bind_results($item_id,$item_name,$image_url,$item_description,$item_price);
+	  if ($statement->fetch() == NULL) {
+		  $statement->close();
+		  return false;
+	  }
+	  return new Product($item_id,$item_name,$image_url,$item_description,$item_price);
   }
 
   /* get_purchases($user)
