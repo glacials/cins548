@@ -35,6 +35,16 @@ class User {
 		return $db->get_user($this->user_id);
 	}
 
+	/* purchases();
+	 * Call the Database::get_purchases($user_id) function, and return an array of purchase objects
+	 * This will create a nice way to get purchases for a particular user.
+	 * Ex:	$purchases =  $user_obj->purchases()
+	 */
+	public function purchases() {
+		// TODO: Not tested yet.
+		return $db->get_purchases($this->id);
+	}
+
   /*
    * Saves the current user to the database. If this is a new user, runs an
    * insert. If it's an existing user, runs an update.
