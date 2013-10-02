@@ -25,6 +25,13 @@ class Database {
     return false;
   }
 
+  /* user_exists($user) {
+   * Will take a user object as input, and check to see if that user exists in the database already,
+   * Useful when adding NEW users to webapp.
+   */
+  public function does_user_exist($user) {
+  }
+
   /* get_item($id)
    * Returns an Item object with ID $id. If no such item exists, returns false.
    */

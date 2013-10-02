@@ -11,16 +11,13 @@ session_start();
 
 $db = new Database;
 
-$out = $db->verify_creds($_POST['username'],$_POST['password']);
+$user = $db->verify_creds($_POST['username'],$_POST['password']);
 
-if ($out != false) {
-	// Creds are correct. Create session variables.
-	$_SESSION['user_id'] = $out['user_id'];
-	$_SESSION['is_admin'] = $out['is_admin'];
+if ($user != false) {
+	$_SESSION['user'] = $user;
 }
 else {
-	// Creds are incorrect.
-	header('Location: /index.php');
+	// Creds are incorrect. Use a template to display the error info?
 }
 
 ?>
