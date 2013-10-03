@@ -79,7 +79,7 @@ class Database {
 	  }
 
 	  if (empty($array_of_results))
-		  return false
+		  return false;
 	  else
 		  return $array_of_results;
   }
