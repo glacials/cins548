@@ -12,7 +12,6 @@ if (isset($_SESSION['user'])) {
 
 if (isset($_GET['login'])) {
   $page = new Page('login.html', array('page_title' => 'Login'));
-  print $page->html;
 } elseif (isset($_GET['signup'])) {
   $page = new Page('signup.html', array('page_title' => 'Sign up'));
 } elseif (isset($_GET['browse'])) {
