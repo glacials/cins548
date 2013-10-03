@@ -21,10 +21,7 @@ class User {
 	 * Will return if a user is an admin or not.
 	 */
 	public function is_admin() {
-		if ($this->is_admin == 1)
-			return true;
-		else
-			return false;
+		return $this->is_admin == 1;
 	}
 
 	/*
