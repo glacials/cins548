@@ -74,7 +74,7 @@ class Database {
 		  return false;
 	  $statement->bind_results($returned_purchase_id, $returned_user_id, $returned_item_id, $returned_purchase_date);
 
-	  $array_of_puchases = new array();
+	  $array_of_puchases = array();
 
 	  while ($statement->fetch()) {
 		  $item = new Purchase($returned_purchase_id, $returned_user_id, $returned_item_id, $returned_purchase_date);

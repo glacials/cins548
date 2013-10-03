@@ -15,7 +15,6 @@ class Product {
 		$this->description = $Description;
 		$this->price = $Price;
 	}
-
 }
 
 ?>

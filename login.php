@@ -15,9 +15,10 @@ $user = $db->verify_creds($_POST['username'],$_POST['password']);
 
 if ($user != false) {
 	$_SESSION['user'] = $user;
+	$_SESSION['cart'] = array(); // An array of product_ids.
 }
 else {
-	// Creds are incorrect. Use a template to display the error info?
+	header('Location: /?login');
 }
 
 ?>
