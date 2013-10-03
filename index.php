@@ -10,10 +10,26 @@ if (isset($_SESSION['user'])) {
   print 'Logged in! <a href="logout.php">Logout</a>';
 }
 
+$page_vars = array();
+
+if (isset($_SESSION['user'])) {
+  $page_vars['rightnav_url_1'] = '?user';
+  $page_vars['rightnav_text_1'] = $_SESSION['user']->name;
+  $page_vars['rightnav_url_2'] = '?logout';
+  $page_vars['rightnav_text_2'] = 'Log out';
+} else {
+  $page_vars['rightnav_url_1'] = '?login';
+  $page_vars['rightnav_text_1'] = 'Log in';
+  $page_vars['rightnav_url_2'] = '?signup';
+  $page_vars['rightnav_text_2'] = 'Sign up';
+}
+
 if (isset($_GET['login'])) {
-  $page = new Page('login.html', array('page_title' => 'Login'));
+  $page_vars['page_title'] = 'Log in';
+  $page = new Page('login.html', $page_vars);
 } elseif (isset($_GET['signup'])) {
-  $page = new Page('signup.html', array('page_title' => 'Sign up'));
+  $page_vars['page_title'] = 'Sign up';
+  $page = new Page('signup.html', $page_vars);
 } elseif (isset($_GET['browse'])) {
   /*
    * Run each product through its Page, concatenate all that outputted HTML
@@ -27,8 +43,10 @@ if (isset($_GET['login'])) {
     $product_list .= $product_page->html
   }
    */
+  $page_vars['page_title'] = 'Browse items';
   $page = new Page('browse.html', array('page_title' => 'Browse items', 'product_list' => $product_list));
 } else {
+  $page_vars['page_title'] = 'Home';
   $page = new Page('index.html', array('page_title' => 'Home'));
 }
 print $page->html;
