@@ -15,9 +15,9 @@ if (isset($_GET['login'])) {
   print $page->html;
 } elseif (isset($_GET['signup'])) {
   $page = new Page('signup.html', array('page_title' => 'Sign up'));
-  print $page->html;
 } else {
-  print '<a href="?login">Login</a> / <a href="?signup">Sign up</a>';
+  $page = new Page('index.html', array('page_title' => 'Home'));
 }
+print $page->html;
 
 ?>
