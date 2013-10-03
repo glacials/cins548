@@ -65,7 +65,25 @@ class Database {
    * Can be used to get an array of all products that are currently in the database.
    */
   public function get_all_products() {
+	  // TODO: Not Tested
+	  $statement = $this->connection->prepare('SELECT item_id, item_name, image_url, item_description, item_price FROM Products');
 
+	  if($statement->execute())
+		  return false;
+
+	  $statement->bind_results($returned_item_id, $returned_item_name, $returned_image_url, $returned_item_description, $returned_item_price);
+
+	  $array_of_results = array();
+
+	  while ($statement->fetch()) {
+		  $item = new Product($returned_item_id,$returned_item_name,$returned_image_url,$returned_item_description,$returned_item_price);
+		  $array_of_results[] = $item;
+	  }
+
+	  if (empty($array_of_results))
+		  return false
+	  else
+		  return $array_of_results;
   }
 
   /* get_purchases($user)
