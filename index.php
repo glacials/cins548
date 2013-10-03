@@ -2,6 +2,7 @@
 
 require_once 'autoload.php';
 
+session_start();
 $db = new Database;
 
 // Testing the login stuff. The second argument replaces '{page_title}' in header.html.

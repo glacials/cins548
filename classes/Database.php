@@ -23,18 +23,91 @@ class Database {
     return false;
   }
 
+  /* username_exists($username) {
+   * Will take a username input, and check to see if that user exists in the database already.
+   * It will use the username to check and see if it already exists in the database.
+   * Useful when adding NEW users to webapp.
+   */
+  public function username_exists($username) {
+	  // TODO: Not tested yet.
+	  $statement = $this->connection->prepare('SELECT username FROM Users WHERE username = ?');
+	  $statement->bind_param('s', $username);
+	  if ($statement->execute())
+		  return false;
+	  $statement->bind_results($result_username);
+	  if ($statement->fetch() == NULL) {
+		  $statement->close();
+		  return false;
+	  }
+	  $statement->close();
+	  return true;
+  }
+
   /* get_item($id)
    * Returns an Item object with ID $id. If no such item exists, returns false.
    */
   public function get_item($id) {
+	  $statement = $this->connection->prepare('SELECT item_id, item_name, image_url, item_description, item_price FROM Products WHERE item_id = ?');
+	  $statement->bind_param('i',$id);
+	  if ($statement->execute())
+		  return false;
+	  $statement->bind_results($item_id,$item_name,$image_url,$item_description,$item_price);
+	  if ($statement->fetch() == NULL) {
+		  $statement->close();
+		  return false;
+	  }
+	  return new Product($item_id,$item_name,$image_url,$item_description,$item_price);
+  }
+
+  /*get_all_products()
+   * Can be used to get an array of all products that are currently in the database.
+   */
+  public function get_all_products() {
+	  // TODO: Not Tested
+	  $statement = $this->connection->prepare('SELECT item_id, item_name, image_url, item_description, item_price FROM Products');
+
+	  if($statement->execute())
+		  return false;
+
+	  $statement->bind_results($returned_item_id, $returned_item_name, $returned_image_url, $returned_item_description, $returned_item_price);
+
+	  $array_of_results = array();
+
+	  while ($statement->fetch()) {
+		  $item = new Product($returned_item_id,$returned_item_name,$returned_image_url,$returned_item_description,$returned_item_price);
+		  $array_of_results[] = $item;
+	  }
+
+	  if (empty($array_of_results))
+		  return false
+	  else
+		  return $array_of_results;
   }
 
   /* get_purchases($user)
    * Returns an array of all Purchase objects belonging to user $user. $user can
    * be a User object or a user ID. If it's an ID and a user with that ID
-   * doesn't exist, returns false.
+   * doesn't exist, returns false. This function can be called from within the User class.
    */
-  public function get_purchases($user) {
+  public function get_purchases($user_id) {
+	  // TODO: Not tested yet.
+	  $statement = $this->connection->prepare('SELECT purchase_id, user_id, item_id, purchase_date FROM Purchases WHERE user_id = ?');
+	  $statement->bind_param('i',$user_id);
+	  if ($statement->execute())
+		  return false;
+	  $statement->bind_results($returned_purchase_id, $returned_user_id, $returned_item_id, $returned_purchase_date);
+
+	  $array_of_puchases = array();
+
+	  while ($statement->fetch()) {
+		  $item = new Purchase($returned_purchase_id, $returned_user_id, $returned_item_id, $returned_purchase_date);
+		  $array_of_purchases[] = $item;
+	  }
+
+	  // If there are no purchases in the the results, return false
+	  if (empty($array_of_purchases))
+		  return false;
+	  return $array_of_purchases;
   }
 
   /*

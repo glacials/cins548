@@ -16,11 +16,33 @@ class User {
 		$this->gender = $Gender;
 	}
 
+	/*
+	 * is_admin();
+	 * Will return if a user is an admin or not.
+	 */
 	public function is_admin() {
-		if ($is_admin)
+		if ($this->is_admin == 1)
 			return true;
 		else
 			return false;
+	}
+
+	/*
+	 * exists();
+	 * Will call $db->get_user($user_id) and see if the user already exists in the database
+	 */
+	public function exists() {
+		return (bool)$db->get_user($this->user_id);
+	}
+
+	/* purchases();
+	 * Call the Database::get_purchases($user_id) function, and return an array of purchase objects
+	 * This will create a nice way to get purchases for a particular user.
+	 * Ex:	$purchases =  $user_obj->purchases()
+	 */
+	public function purchases() {
+		// TODO: Not tested yet.
+		return $db->get_purchases($this->id);
 	}
 
   /*
