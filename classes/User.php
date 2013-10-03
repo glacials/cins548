@@ -8,13 +8,28 @@ class User {
 	private $is_admin;
 	private $gender;
 
-	function __construct($Id, $Username, $Password_hash, $Is_admin, $Gender) {
+	public function __construct($Id, $Username, $Password_hash, $Is_admin, $Gender) {
 		$this->id = $ID;
 		$this->username = $Username;
 		$this->password_hash = $Password_hash;
 		$this->is_admin = $Is_admin;
 		$this->gender = $Gender;
 	}
+
+  /*
+   * __get($var);
+   * Lets us read class member variables without writing individual getter
+   * functions. Now we can access the variables as if they were public, but we
+   * have no write access to them. Also, we can restrict which variables can be
+   * accessed like this with the $allowed_vars array below.
+   */
+  public function __get($var) {
+    $allowed_vars = array('id', 'username', 'gender');
+    if (in_array($var, $allowed_vars))
+      return $this->$var;
+    else
+      return false;
+  }
 
 	/*
 	 * is_admin();
