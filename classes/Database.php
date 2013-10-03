@@ -61,6 +61,13 @@ class Database {
 	  return new Product($item_id,$item_name,$image_url,$item_description,$item_price);
   }
 
+  /*get_all_products()
+   * Can be used to get an array of all products that are currently in the database.
+   */
+  public function get_all_products() {
+
+  }
+
   /* get_purchases($user)
    * Returns an array of all Purchase objects belonging to user $user. $user can
    * be a User object or a user ID. If it's an ID and a user with that ID
