@@ -16,9 +16,10 @@ $user = $db->verify_creds($_POST['username'],$_POST['password']);
 if ($user != false) {
 	$_SESSION['user'] = $user;
 	$_SESSION['cart'] = array(); // An array of product_ids.
+	header('Location: /?browse');
 }
 else {
-	header('Location: /?login');
+	header('Location: /?browse');
 }
 
 ?>
