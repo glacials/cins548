@@ -44,10 +44,11 @@ if (isset($_GET['login'])) {
   }
    */
   $page_vars['page_title'] = 'Browse items';
-  $page = new Page('browse.html', array('page_title' => 'Browse items', 'product_list' => $product_list));
+  $page_vars['product_list'] = $product_list;
+  $page = new Page('browse.html', $page_vars);
 } else {
   $page_vars['page_title'] = 'Home';
-  $page = new Page('index.html', array('page_title' => 'Home'));
+  $page = new Page('index.html', $page_vars);
 }
 print $page->html;
 
