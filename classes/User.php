@@ -59,10 +59,25 @@ class User {
 
   /*
    * Saves the current user to the database. If this is a new user, runs an
-   * insert. If it's an existing user, runs an update.
+   * insert. If it's an existing user, runs an update. Params = 'update' or 'insert'.
    */
-  public function save() {
-    //todo
+	public function save($param) {
+		$db = new Database;
+
+		// This section is for inserting a new user. Used with the signup page.
+		if ($param == 'insert') {
+			if (!$db->username_exists($username)) {
+				return $db->insert_user(0,$this->username,$this->password_hash,$this->is_admin, $this->gender);
+			}
+			else
+				return false;
+		}
+		
+		// This section is for updating a user. Used with the page where admins/users can
+		// change their personal data.
+		if ($param == 'update') {
+			// Haven't implemented fully.
+		}
   }
 }
 
