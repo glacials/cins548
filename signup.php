@@ -13,8 +13,10 @@ if (!(empty($username) or empty($password) or empty($password_confirm) or empty(
 
 	// Create new User object with variables, initialize data.
 	$user = new User(0,$username,$password,0,$gender);
-	$user->save('insert');
-	header ('Location: /?browse');
+	if ($user->save('insert') != false)
+		header('Location: /?browse');
+	else
+		header('Location: /?signup');
 }
 else
 	header ('Location: /?signup');
