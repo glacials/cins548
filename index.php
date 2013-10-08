@@ -60,6 +60,10 @@ if (isset($_GET['login'])) {
   $page_vars['page_title'] = 'Browse items';
   $page_vars['product_list'] = $product_list;
   $page = new Page('browse.html', $page_vars);
+} elseif (isset($_GET['user'])) {
+  $page_vars['page_title'] = 'User profile';
+  $page_vars['user_email'] = $_SESSION['user']->email;
+  $page = new Page('user.html', $page_vars);
 } else {
   $page_vars['page_title'] = 'Home';
   $page = new Page('index.html', $page_vars);
