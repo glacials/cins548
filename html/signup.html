@@ -1,6 +1,6 @@
 <div class="col-md-6">
   <h1>Sign up</h1>
-  <form class="form-horizontal" role="form" method="post" action="?signup">
+  <form class="form-horizontal" role="form" method="post" action="?signup" name="signup_form">
     <div class="form-group">
       <label for="inputEmail1" class="col-lg-2 control-label input-lg">Email</label>
       <div class="col-lg-10">
@@ -41,3 +41,6 @@
     </div>
   </form>
 </div>
+<script type="text/javascript" language="JavaScript">
+  document.forms['signup_form'].elements['email'].focus();
+</script>
