@@ -13,7 +13,7 @@ class Database {
    */
   public function get_user($id) {
     // TODO: This ain't tested yet
-    $statement = $this->connection->prepare('SELECT user_id, username, password_hash, is_admin, gender FROM Users WHERE user_id = ?');
+    $statement = $this->connection->prepare('SELECT user_id, username, password_hash, is_admin, gender FROM Users WHERE user_id=?');
     $statement->bind_param('i', $id);
     if ($statement->execute()) {
       $statement->bind_result($id, $username, $password_hash, $is_admin, $gender);
@@ -133,24 +133,16 @@ class Database {
    */
   public function verify_creds($username, $password) {
 	  $password = crypt($password, 'dLp#32A');
+	  $statement = $this->connection->prepare('SELECT user_id FROM Users WHERE username=? AND password_hash=?');
 
-	  $statement = $this->connection->prepare('SELECT user_id FROM Users WHERE username = ? AND password_hash = ?');
 	  $statement->bind_param('ss', $username, $password);
-
-	  if (!$statement->execute())
-		  return false;
-
-	  $statement->bind_result($result_user_id);
-
-	  if($statement->fetch() == NULL) {
-	  	$statement->close();
-		return false;
+	  if ($statement->execute()) {
+		  $statement->bind_result($user_id);
+		  while ($statement->fetch()) {
+			  $user_obj = $this->get_user($user_id);
+			  return $user_obj;
+		  }
 	  }
-
-	  $statement->close();
-	  $user_object = $this->get_user($result_user_id);
-	  return $user_object;
   }
-
 }
 ?>
