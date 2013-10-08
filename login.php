@@ -1,4 +1,4 @@
-<?
+<?php
 /*
  * This page will authenticate users and create session variables, that tells
  * the webapp that the user is authenticated, and they are allowed to browse to
