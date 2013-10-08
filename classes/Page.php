@@ -47,7 +47,11 @@ class Page {
   }
 
   /* html()
-   * Returns the resulting HTML from processing this page.
+   * Returns the resulting HTML from processing this page. Specifically, reads
+   * in html/header.html, $this->file, and html/footer.html, concatenates them
+   * in that order, and replaces any occurrences of '{any_string}' with the
+   * corresponding value in $this->page_vars. If there isn't one, the occurrence
+   * is removed.
    */
   public function html() {
     $html = file_get_contents('html/header.html') . "\n";
@@ -55,6 +59,7 @@ class Page {
     $html .= file_get_contents('html/footer.html');
     foreach ($this->page_vars as $key => $val)
       $html = str_replace('{' . $key . '}', $val, $html);
+    $html = preg_replace('/\{(.*)\}/', '', $html);
     return $html;
   }
 
