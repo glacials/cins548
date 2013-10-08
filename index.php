@@ -21,7 +21,7 @@ if (isset($_SESSION['notice'])) {
 
 if (isset($_SESSION['user'])) {
   $page_vars['rightnav_url_1'] = '?user';
-  $page_vars['rightnav_text_1'] = $_SESSION['user']->name;
+  $page_vars['rightnav_text_1'] = $_SESSION['user']->username;
   $page_vars['rightnav_url_2'] = '?logout';
   $page_vars['rightnav_text_2'] = 'Log out';
 } else {
