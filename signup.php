@@ -9,16 +9,22 @@ $password_confirm = crypt($_POST['password'],'dLp#32A');
 $gender = $_POST['gender'];
 
 // Redirect back to signup page if any of the fields are empty, or if the passwords don't match each other.
-if (!(empty($username) or empty($password) or empty($password_confirm) or empty($gender) or $password == $password_confirm)) {
-
-	// Create new User object with variables, initialize data.
-	$user = new User(0,$username,$password,0,$gender);
-	if ($user->save('insert') != false)
-		header('Location: ?browse');
-	else
-		header('Location: ?signup');
-} else {
+if (empty($username)         || empty($password) ||
+    empty($password_confirm) || empty($gender)   ||
+    $password != $password_confirm
+   ) {
   $_SESSION['error'] = 'All fields must be filled out.';
   header('Location: ?signup');
+} else {
+  // Create new User object with variables, initialize data.
+  $user = new User(0, $username, $password, 0, $gender);
+  if ($user->save('insert')) {
+    $_SESSION['user'] = $user;
+    $_SESSION['notice'] = 'Account created!';
+    header('Location: ?');
+  } else {
+    $_SESSION['error'] = 'There was a problem making your account. Please try again later.';
+    header('Location: ?signup');
+  }
 }
 ?>

@@ -42,6 +42,8 @@ if (isset($_GET['login'])) {
   $_SESSION['notice'] = 'Successfully logged out.';
   header('Location: ?');
 } elseif (isset($_GET['signup'])) {
+  if (isset($_POST['email']))
+    require_once 'signup.php';
   $page_vars['page_title'] = 'Sign up';
   $page = new Page('signup.html', $page_vars);
 } elseif (isset($_GET['browse'])) {
