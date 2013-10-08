@@ -32,10 +32,13 @@ if (isset($_SESSION['user'])) {
 }
 
 if (isset($_GET['login'])) {
+  if (isset($_POST['email']))
+    require_once 'login.php';
   $page_vars['page_title'] = 'Log in';
   $page = new Page('login.html', $page_vars);
 } elseif (isset($_GET['logout'])) {
   session_destroy();
+  session_start();
   $_SESSION['notice'] = 'Successfully logged out.';
   header('Location: ?');
 } elseif (isset($_GET['signup'])) {
