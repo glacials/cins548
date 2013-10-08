@@ -30,6 +30,20 @@ class Product {
 			'product_price' => $this->price
 		);
 	}
+
+	/*
+	 * __get($var);
+	 * Lets us read class member variables without writing individual getter functions.
+	 * We can have access to the variables as if they were public, but we have no write access
+	 * to them. Also, we can restrict which variables can be accesed like this with the allowed_vars array below.
+	 */
+	public function __get($var) {
+		$allowed_vars = array('product_id','product_name','product_image_url','product_description','product_price');
+		if (in_array($var, $allowed_vars))
+			return $this->$var;
+		else
+			return false;
+	}
 }
 
 ?>
