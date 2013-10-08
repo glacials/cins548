@@ -11,15 +11,15 @@ session_start();
 
 $db = new Database;
 
-$user = $db->verify_creds($_POST['username'],$_POST['password']);
+$user = $db->verify_creds($_POST['email'],$_POST['password']);
 
 if ($user != false) {
 	$_SESSION['user'] = $user;
 	$_SESSION['cart'] = array(); // An array of product_ids.
-	header('Location: /?browse');
+	header('Location: /');
 }
 else {
-	header('Location: /?browse');
+	header('Location: /?login');
 }
 
 ?>
