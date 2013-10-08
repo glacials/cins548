@@ -51,14 +51,15 @@ if (isset($_GET['login'])) {
    * Run each product through its Page, concatenate all that outputted HTML
    * together, then pass that to the browse.html Page via the product_list
    * variable.
+   *
+   * NOTE: NOT 100% DONE YET
    */
-  /* todo: Doesn't yet work
   $product_list = '';
   foreach ($db->get_all_products() as $product) {
-    $product_page = new Page('product.html', array('product_name' => $some-name, 'product_desc' => $some-desc, ..etc));
-    $product_list .= $product_page->html
+    $product_page = new Page('product.html', array('product_name' => $product->name, 'product_description' => $product->description, 'product_img' => $product->image_url, 'product_id' => $product->id));
+    $product_list .= $product_page->html_no_header_footer;
   }
-   */
+
   $page_vars['page_title'] = 'Browse items';
   $page_vars['product_list'] = $product_list;
   $page = new Page('browse.html', $page_vars);

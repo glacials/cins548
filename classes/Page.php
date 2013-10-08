@@ -72,6 +72,20 @@ class Page {
     return $html;
   }
 
+  /*
+   * This function can be used when we are building the browse page. It creates the HTML
+   * minus the header and footer. Before, the header and footer would be repeated with each
+   * product.
+   */
+  public function html_no_header_footer() {
+	  $html = '';
+	  $html .= file_get_contents('html/' . $this->file) . "\n";
+	  foreach ($this->page_vars as $key => $val)
+		  $html = str_replace('{' . $key . '}', $val, $html);
+	  $html = preg_replace('/\{(.*)\}/', '', $html);
+	  return $html;
+  }
+
 }
 
 ?>
