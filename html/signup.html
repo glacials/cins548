@@ -1,6 +1,5 @@
 <div class="col-md-6">
   <h1>Sign up</h1>
-  {error_msg}
   <form class="form-horizontal" role="form" method="post" action="signup.php">
     <div class="form-group">
       <label for="inputEmail1" class="col-lg-2 control-label input-lg">Email</label>
@@ -42,26 +41,3 @@
     </div>
   </form>
 </div>
-
-<?php /* the following code is supposed to go in here somewhere to display error messages in the form when the fields are tleft blank:
-
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-
-E-mail:
-<input type="text" name="email">
-<span class="error">* <?php echo $emailErr;?></span>
-<br><br>
-Password:
-<input type="text" name="password">
-<span class="error"><?php echo $passwordErr;?></span>
-<br><br>
-Gender:
-<input type="radio" name="gender" value="female">Female
-<input type="radio" name="gender" value="male">Male
-<span class="error">* <?php echo $genderErr;?></span>
-<br><br>
-<input type="submit" name="submit" value="Submit">
-
-
-</form> 
-*/?>
