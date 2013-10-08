@@ -12,6 +12,18 @@ if (isset($_SESSION['user'])) {
 
 $page_vars = array();
 
+// Set the page's error message if it needs to be displayed, then clear it
+if (isset($_SESSION['error'])) {
+  $error = new Page('error.html', array('error' => $_SESSION['error']), false);
+  $page_vars['error'] = $error->html;
+  unset($_SESSION['error']);
+}
+if (isset($_SESSION['notice'])) {
+  $notice = new Page('notice.html', array('notice' => $_SESSION['notice']), false);
+  $page_vars['notice'] = $notice->html;
+  unset($_SESSION['notice']);
+}
+
 if (isset($_SESSION['user'])) {
   $page_vars['rightnav_url_1'] = '?user';
   $page_vars['rightnav_text_1'] = $_SESSION['user']->name;

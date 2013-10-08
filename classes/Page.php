@@ -13,6 +13,7 @@ class Page {
 
   private $file;
   private $page_vars;
+  private $surround;
 
   /* __construct($file, $page_vars = false)
    * Outputs the contents of 'html/$file', replacing certain keywords with
@@ -27,13 +28,18 @@ class Page {
    *
    * If $page_vars is not passed (e.g. via "new Page('index.html')") then no
    * replacements are made.
+   *
+   * If $surround is true (default when not passed), the header and footer are
+   * inserted around the page's HTML when it is output. If it is false, they are
+   * not.
    */
-  public function __construct($file, $page_vars = array()) {
+  public function __construct($file, $page_vars = array(), $surround = true) {
     // If someone tries to include some file not in the "html" directory, panic
     if (strstr($file, '..'))
       Application::panic('You can\'t run pages not in the "html" directory.');
     $this->file = $file;
     $this->page_vars = $page_vars;
+    $this->surround = $surround;
   }
 
   /* __get($var)
@@ -54,9 +60,12 @@ class Page {
    * is removed.
    */
   public function html() {
-    $html = file_get_contents('html/header.html') . "\n";
+    $html = '';
+    if ($this->surround)
+      $html .= file_get_contents('html/header.html') . "\n";
     $html .= file_get_contents('html/' . $this->file) . "\n";
-    $html .= file_get_contents('html/footer.html');
+    if ($this->surround)
+      $html .= file_get_contents('html/footer.html');
     foreach ($this->page_vars as $key => $val)
       $html = str_replace('{' . $key . '}', $val, $html);
     $html = preg_replace('/\{(.*)\}/', '', $html);

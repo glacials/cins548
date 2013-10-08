@@ -1,12 +1,7 @@
 <div class="col-md-6">
   <h1>Sign up</h1>
-  
-  // $_SERVER["PHP_SELF"] exploits can be avoided by using the htmlspecialchars() function.
-  // The htmlspecialchars() function converts special characters to HTML entities.
-  // I added this to the next line: action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"
-  // Not certain how to correctly implement it with the two actions?  Help!  Scott
-  
-  <form class="form-horizontal" role="form" method="post" action="/signup.php" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+  {error_msg}
+  <form class="form-horizontal" role="form" method="post" action="signup.php">
     <div class="form-group">
       <label for="inputEmail1" class="col-lg-2 control-label input-lg">Email</label>
       <div class="col-lg-10">
@@ -28,8 +23,16 @@
     <div class="form-group">
       <label for="sex_radio" class="col-lg-2 control-label">Gender</label>
       <div class="col-lg-10">
-	      <input type="radio" name="gender" value="m" checked="checked">Male
-	      <input type="radio" name="gender" value="f">Female
+        <div class="radio">
+          <label class="radio-inline">
+            <input type="radio" name="gender" value="m" checked> Male
+          </label>
+        </div>
+        <div class="radio">
+          <label class="radio-inline">
+            <input type="radio" name="gender" value="f"> Female
+          </label>
+        </div>
       </div>
     </div>
     <div class="form-group">
