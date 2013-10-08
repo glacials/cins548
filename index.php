@@ -5,11 +5,6 @@ require_once 'autoload.php';
 session_start();
 $db = new Database;
 
-// Testing the login stuff. The second argument replaces '{page_title}' in header.html.
-if (isset($_SESSION['user'])) {
-  print 'Logged in! <a href="logout.php">Logout</a>';
-}
-
 $page_vars = array();
 
 // Set the page's error message if it needs to be displayed, then clear it
