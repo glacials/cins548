@@ -142,7 +142,6 @@ class Database {
 		  if ($statement->fetch()) {
 			  $statement->close();
 			  $user_obj = $this->get_user($user_id);
-			  var_dump($user_obj);
 			  return $user_obj;
 		  }
 	  }
