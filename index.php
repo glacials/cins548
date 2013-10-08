@@ -36,6 +36,7 @@ if (isset($_GET['login'])) {
   $page = new Page('login.html', $page_vars);
 } elseif (isset($_GET['logout'])) {
   session_destroy();
+  $_SESSION['notice'] = 'Successfully logged out.';
   header('Location: ?');
 } elseif (isset($_GET['signup'])) {
   $page_vars['page_title'] = 'Sign up';
