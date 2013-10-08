@@ -13,7 +13,7 @@ class Database {
    */
   public function get_user($id) {
     // TODO: This ain't tested yet
-    $statement = $this->connection->prepare('SELECT user_id, username, password_hash, is_admin, gender FROM Users WHERE user_id=?');
+	  $statement = $this->connection->prepare('SELECT user_id, username, password_hash, is_admin, gender FROM Users WHERE user_id=?');
     $statement->bind_param('i', $id);
     if ($statement->execute()) {
       $statement->bind_result($id, $username, $password_hash, $is_admin, $gender);
@@ -93,8 +93,9 @@ class Database {
 	  // TODO: Not tested yet.
 	  $statement = $this->connection->prepare('SELECT purchase_id, user_id, item_id, purchase_date FROM Purchases WHERE user_id = ?');
 	  $statement->bind_param('i',$user_id);
-	  if (!$statement->execute())
+	  if (!$statement->execute()) {
 		  return false;
+	  }
 	  $statement->bind_results($returned_purchase_id, $returned_user_id, $returned_item_id, $returned_purchase_date);
 
 	  $array_of_puchases = array();
@@ -138,11 +139,14 @@ class Database {
 	  $statement->bind_param('ss', $username, $password);
 	  if ($statement->execute()) {
 		  $statement->bind_result($user_id);
-		  while ($statement->fetch()) {
+		  if ($statement->fetch()) {
+			  $statement->close();
 			  $user_obj = $this->get_user($user_id);
+			  var_dump($user_obj);
 			  return $user_obj;
 		  }
 	  }
+	  $statement->close();
   }
 }
 ?>
