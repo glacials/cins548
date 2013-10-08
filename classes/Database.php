@@ -69,7 +69,7 @@ class Database {
 	  if(!$statement->execute())
 		  return false;
 
-	  $statement->bind_results($returned_item_id, $returned_item_name, $returned_image_url, $returned_item_description, $returned_item_price);
+	  $statement->bind_result($returned_item_id, $returned_item_name, $returned_image_url, $returned_item_description, $returned_item_price);
 
 	  $array_of_results = array();
 
