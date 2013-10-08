@@ -66,7 +66,7 @@ class Database {
 	  // TODO: Not Tested
 	  $statement = $this->connection->prepare('SELECT item_id, item_name, image_url, item_description, item_price FROM Products');
 
-	  if($statement->execute())
+	  if(!$statement->execute())
 		  return false;
 
 	  $statement->bind_results($returned_item_id, $returned_item_name, $returned_image_url, $returned_item_description, $returned_item_price);
@@ -82,6 +82,25 @@ class Database {
 		  return false;
 	  else
 		  return $array_of_results;
+  }
+
+  public function get_products_like($query) {
+    $statement = $this->connection->prepare('SELECT item_id, item_name, image_url, item_description, item_price FROM Products WHERE (item_name LIKE ?) OR (item_description LIKE ?)');
+    $statement->bind_param('ss', $query, $query);
+
+    if (!$statement->execute())
+      return false;
+
+    $statement->bind_results($product_id, $product_name, $product_image_url, $product_description, $product_price);
+
+    while ($statement->fetch()) {
+      $product = new Product($product_id, $product_name, $product_image_url, $product_description, $product_price);
+      $results[] = $product;
+    }
+
+    if (empty($results))
+      return false;
+    return $results;
   }
 
   /* get_purchases($user)

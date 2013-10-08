@@ -8,6 +8,14 @@ class Product {
 	private $description;
 	private $price;
 
+  /* static search($query)
+   * Returns an array of Products whose names or descriptions contain the string
+   * $query.
+   */
+  public static function search($query) {
+    return Database::get_products_like($query);
+  }
+
 	public function __construct($Id, $Name, $Image_url, $Description, $Price) {
 		$this->id = $Id;
 		$this->name = $Name;

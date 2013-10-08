@@ -54,12 +54,23 @@ if (isset($_GET['login'])) {
    */
   /* todo: Doesn't yet work
   $product_list = '';
-  foreach ($db->get_all_products()) {
+  foreach ($db->get_all_products() as $product) {
     $product_page = new Page('product.html', array('product_name' => $some-name, 'product_desc' => $some-desc, ..etc));
     $product_list .= $product_page->html
   }
    */
   $page_vars['page_title'] = 'Browse items';
+  $page_vars['product_list'] = $product_list;
+  $page = new Page('browse.html', $page_vars);
+} elseif (isset($_GET['search'])) {
+  foreach (Product::get_products_like($_GET['search']) as $product) {
+    $product_page = new Page('product.html', array('product_name'        => $product->name,
+                                                   'product_description' => $product->description,
+                                                   'product_image_url'   => $product->image_url,
+                                                   'product_price'       => $product->price));
+    $product_list .= $product_page->html;
+  }
+  $page_Vars['page_title'] = 'Search for \'' . $_GET['search'] . '\'';
   $page_vars['product_list'] = $product_list;
   $page = new Page('browse.html', $page_vars);
 } elseif (isset($_GET['user'])) {
