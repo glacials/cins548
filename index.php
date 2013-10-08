@@ -34,6 +34,9 @@ if (isset($_SESSION['user'])) {
 if (isset($_GET['login'])) {
   $page_vars['page_title'] = 'Log in';
   $page = new Page('login.html', $page_vars);
+} elseif (isset($_GET['logout'])) {
+  session_destroy();
+  header('Location: ?');
 } elseif (isset($_GET['signup'])) {
   $page_vars['page_title'] = 'Sign up';
   $page = new Page('signup.html', $page_vars);
