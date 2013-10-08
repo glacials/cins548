@@ -24,20 +24,12 @@ class User {
    * accessed like this with the $allowed_vars array below.
    */
   public function __get($var) {
-    $allowed_vars = array('id', 'username', 'gender');
+    $allowed_vars = array('id', 'username', 'is_admin', 'gender',);
     if (in_array($var, $allowed_vars))
       return $this->$var;
     else
       return false;
   }
-
-	/*
-	 * is_admin();
-	 * Will return if a user is an admin or not.
-	 */
-	public function is_admin() {
-		return $this->is_admin == 1;
-	}
 
 	/*
 	 * exists();
