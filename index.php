@@ -56,7 +56,7 @@ if (isset($_GET['login'])) {
    */
   $product_list = '';
   foreach ($db->get_all_products() as $product) {
-    $product_page = new Page('product.html', array('product_name' => $product->name, 'product_description' => $product->description, 'product_img' => $product->image_url, 'product_id' => $product->id));
+    $product_page = new Page('product.html', array('product_name' => $product->name, 'product_description' => $product->description, 'product_img' => $product->image_url, 'product_id' => $product->id, 'product_price' => $product->price));
     $product_list .= $product_page->html_no_header_footer;
   }
 
