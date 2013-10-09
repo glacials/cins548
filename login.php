@@ -7,7 +7,7 @@
 
 require_once 'autoload.php';
 
-session_start();
+//session_start();
 
 $db = new Database;
 

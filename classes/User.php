@@ -8,16 +8,18 @@ class User {
 	private $is_admin;
 	private $reset_question;
 	private $reset_answer;
+	private $address;
 	private $gender;
 
-	public function __construct($Id, $Username, $Password_hash, $Is_admin, $Gender, $Reset_question, $Reset_answer) {
-		$this->id = $ID;
+	public function __construct($Id, $Username, $Password_hash, $Is_admin, $Gender, $Reset_question, $Reset_answer, $Address) {
+		$this->id = $Id;
 		$this->username = $Username;
 		$this->password_hash = $Password_hash;
 		$this->is_admin = $Is_admin;
 		$this->gender = $Gender;
 		$this->reset_question = $Reset_question;
 		$this->reset_answer = $Reset_answer;
+		$this->address = $Address;
 	}
 
   /*
@@ -28,7 +30,7 @@ class User {
    * accessed like this with the $allowed_vars array below.
    */
   public function __get($var) {
-    $allowed_vars = array('id', 'username', 'is_admin', 'gender', 'reset_question');
+    $allowed_vars = array('id', 'username', 'is_admin', 'gender', 'reset_question', 'address');
     if (in_array($var, $allowed_vars))
       return $this->$var;
     else
@@ -62,8 +64,8 @@ class User {
 
 		// This section is for inserting a new user. Used with the signup page.
 		if ($param == 'insert') {
-			if (!$db->username_exists($username)) {
-				return $db->insert_user(0,$this->username,$this->password_hash,$this->is_admin, $this->gender);
+			if (!$db->username_exists($this->username)) {
+				return $db->insert_user(0,$this->username,$this->password_hash,$this->is_admin, $this->gender, $this->reset_question, $this->reset_answer, $this->address);
 			}
 			else
 				return false;

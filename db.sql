@@ -114,10 +114,11 @@ CREATE TABLE `Users` (
   `updated` datetime NOT NULL,
   `reset_question` varchar(100) NOT NULL,
   `reset_answer` varchar(50) NOT NULL,
+  `address` varchar(100) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_id` (`user_id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +127,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (3,'admin@gmail.com','dL0GU02VpDZYE',1,'m','2013-10-01 04:43:02','What\'s my favorite color?','dLxWZkjhDSkFA'),(4,'frank@gmail.com','dL0GU02VpDZYE',0,'m','2013-09-17 15:21:44','What\'s my favorite color?','dLxWZkjhDSkFA'),(5,'melissa@gmail.com','dL0GU02VpDZYE',0,'f','2013-09-25 20:44:52','What\'s my favorite color?','dLxWZkjhDSkFA'),(6,'billy@gmail.com','dL0GU02VpDZYE',0,'m','2013-10-02 19:06:33','What\'s my favorite color?','dLxWZkjhDSkFA'),(17,'kyle@yahoo.com','dL0GU02VpDZYE',0,'m','2013-10-04 23:27:39','What\'s my favorite color?','dLxWZkjhDSkFA'),(18,'kyle@gmail.com','dL0GU02VpDZYE',0,'m','2013-10-04 23:29:46','What\'s my favorite color?','dLxWZkjhDSkFA'),(19,'news@gmail.com','dLcLxK.JyY3Bs',0,'f','2013-10-05 09:29:39','What\'s my favorite color?','dLxWZkjhDSkFA'),(20,'frank@yahoo.com','dL4jdgimBZrAs',0,'m','2013-10-07 17:07:50','What\'s my favorite color?','dLxWZkjhDSkFA'),(21,'testing@w.com','dL91GVrxNmo/o',0,'m','2013-10-07 17:49:11','What\'s my favorite color?','dLxWZkjhDSkFA'),(23,'nomadmtb@gmail.com','dL0GU02VpDZYE',0,'m','2013-10-07 22:12:08','What\'s my favorite color?','dLxWZkjhDSkFA'),(24,'franken@frank.com','dLPDrBkxGyN7I',0,'m','2013-10-08 14:47:58','What\'s my favorite color?','dLxWZkjhDSkFA');
+INSERT INTO `Users` VALUES (3,'admin@gmail.com','dL0GU02VpDZYE',1,'m','2013-10-01 04:43:02','What\'s my favorite color?','dLxWZkjhDSkFA','123 Testing Ave. Chico, CA, 95926'),(4,'frank@gmail.com','dL0GU02VpDZYE',0,'m','2013-09-17 15:21:44','What\'s my favorite color?','dLxWZkjhDSkFA','123 Testing Ave. Chico, CA, 95926'),(5,'melissa@gmail.com','dL0GU02VpDZYE',0,'f','2013-09-25 20:44:52','What\'s my favorite color?','dLxWZkjhDSkFA','123 Testing Ave. Chico, CA, 95926'),(6,'billy@gmail.com','dL0GU02VpDZYE',0,'m','2013-10-02 19:06:33','What\'s my favorite color?','dLxWZkjhDSkFA','123 Testing Ave. Chico, CA, 95926'),(17,'kyle@yahoo.com','dL0GU02VpDZYE',0,'m','2013-10-04 23:27:39','What\'s my favorite color?','dLxWZkjhDSkFA','123 Testing Ave. Chico, CA, 95926'),(18,'kyle@gmail.com','dL0GU02VpDZYE',0,'m','2013-10-04 23:29:46','What\'s my favorite color?','dLxWZkjhDSkFA','123 Testing Ave. Chico, CA, 95926'),(19,'news@gmail.com','dLcLxK.JyY3Bs',0,'f','2013-10-05 09:29:39','What\'s my favorite color?','dLxWZkjhDSkFA','123 Testing Ave. Chico, CA, 95926'),(20,'frank@yahoo.com','dL4jdgimBZrAs',0,'m','2013-10-07 17:07:50','What\'s my favorite color?','dLxWZkjhDSkFA','123 Testing Ave. Chico, CA, 95926'),(21,'testing@w.com','dL91GVrxNmo/o',0,'m','2013-10-07 17:49:11','What\'s my favorite color?','dLxWZkjhDSkFA','123 Testing Ave. Chico, CA, 95926'),(23,'nomadmtb@gmail.com','dL0GU02VpDZYE',0,'m','2013-10-07 22:12:08','What\'s my favorite color?','dLxWZkjhDSkFA','123 Testing Ave. Chico, CA, 95926'),(24,'franken@frank.com','dLPDrBkxGyN7I',0,'m','2013-10-08 14:47:58','What\'s my favorite color?','dLxWZkjhDSkFA','123 Testing Ave. Chico, CA, 95926'),(30,'zooguy@gmail.com','dLiOiZ5qz02gc',0,'f','2013-10-08 19:52:48','What my favorite animal?','dLsYEj5u8roOs','123 Zoo Road, Chico, CA 95926');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -139,4 +140,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-08 19:04:42
+-- Dump completed on 2013-10-08 19:54:08
