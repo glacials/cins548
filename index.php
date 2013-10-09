@@ -47,20 +47,15 @@ if (isset($_GET['login'])) {
   $page_vars['page_title'] = 'Sign up';
   $page = new Page('signup.html', $page_vars);
 } elseif (isset($_GET['browse'])) {
-  /*
-   * Run each product through its Page, concatenate all that outputted HTML
-   * together, then pass that to the browse.html Page via the product_list
-   * variable.
-   *
-   * NOTE: NOT 100% DONE YET
-   */
-  $product_list = '';
   foreach ($db->get_all_products() as $product) {
-    $product_page = new Page('product.html', array('product_name' => $product->name, 'product_description' => $product->description, 'product_img' => $product->image_url, 'product_id' => $product->id, 'product_price' => $product->price));
-    $product_list .= $product_page->html_no_header_footer;
+    $product_page = new Page('product.html', array('product_id'          => $product->id,
+                                                   'product_name'        => $product->name,
+                                                   'product_description' => $product->description,
+                                                   'product_img'         => $product->image_url,
+                                                   'product_price'       => $product->price), false);
+    $product_list .= $product_page->html;
   }
-
-  $page_vars['page_title'] = 'Browse items';
+  $page_Vars['page_title'] = 'Browse items';
   $page_vars['product_list'] = $product_list;
   $page = new Page('browse.html', $page_vars);
 } elseif (isset($_GET['search'])) {
@@ -68,12 +63,12 @@ if (isset($_GET['login'])) {
     $product_page = new Page('product.html', array('product_name'        => $product->name,
                                                    'product_description' => $product->description,
                                                    'product_image_url'   => $product->image_url,
-                                                   'product_price'       => $product->price));
+                                                   'product_price'       => $product->price), false);
     $product_list .= $product_page->html;
   }
   $page_Vars['page_title'] = 'Search for \'' . $_GET['search'] . '\'';
   $page_vars['product_list'] = $product_list;
-  $page = new Page('browse.html', $page_vars);
+  $page = new Page('search.html', $page_vars);
 } elseif (isset($_GET['user'])) {
   $page_vars['page_title'] = 'User profile';
   $page_vars['user_email'] = $_SESSION['user']->email;

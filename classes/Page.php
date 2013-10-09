@@ -15,7 +15,7 @@ class Page {
   private $page_vars;
   private $surround;
 
-  /* __construct($file, $page_vars = false)
+  /* __construct($file, $page_vars = false, $surround = true)
    * Outputs the contents of 'html/$file', replacing certain keywords with
    * content as specified by the array $page_vars.
    *
@@ -70,20 +70,6 @@ class Page {
       $html = str_replace('{' . $key . '}', $val, $html);
     $html = preg_replace('/\{(.*)\}/', '', $html);
     return $html;
-  }
-
-  /*
-   * This function can be used when we are building the browse page. It creates the HTML
-   * minus the header and footer. Before, the header and footer would be repeated with each
-   * product.
-   */
-  public function html_no_header_footer() {
-	  $html = '';
-	  $html .= file_get_contents('html/' . $this->file) . "\n";
-	  foreach ($this->page_vars as $key => $val)
-		  $html = str_replace('{' . $key . '}', $val, $html);
-	  $html = preg_replace('/\{(.*)\}/', '', $html);
-	  return $html;
   }
 
 }
