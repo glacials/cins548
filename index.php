@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set("display_errors",1);
 
 require_once 'autoload.php';
 
@@ -18,6 +20,10 @@ if (isset($_SESSION['notice'])) {
   $page_vars['notice'] = $notice->html;
   unset($_SESSION['notice']);
 }
+
+if (!isset($_SESSION['cart']))
+  $_SESSION['cart'] = array();
+$page_vars['cart_size'] = count($_SESSION['cart']);
 
 if (isset($_SESSION['user'])) {
   $page_vars['rightnav_url_1'] = '?user';
@@ -47,6 +53,7 @@ if (isset($_GET['login'])) {
   $page_vars['page_title'] = 'Sign up';
   $page = new Page('signup.html', $page_vars);
 } elseif (isset($_GET['browse'])) {
+  $product_list = '';
   foreach ($db->get_all_products() as $product) {
     $product_page = new Page('product.html', array('product_id'          => $product->id,
                                                    'product_name'        => $product->name,
@@ -59,6 +66,7 @@ if (isset($_GET['login'])) {
   $page_vars['product_list'] = $product_list;
   $page = new Page('browse.html', $page_vars);
 } elseif (isset($_GET['search'])) {
+  $product_list = '';
   foreach (Product::get_products_like($_GET['search']) as $product) {
     $product_page = new Page('product.html', array('product_name'        => $product->name,
                                                    'product_description' => $product->description,
@@ -66,13 +74,42 @@ if (isset($_GET['login'])) {
                                                    'product_price'       => $product->price), false);
     $product_list .= $product_page->html;
   }
-  $page_Vars['page_title'] = 'Search for \'' . $_GET['search'] . '\'';
+  $page_vars['page_title'] = 'Search for \'' . $_GET['search'] . '\'';
   $page_vars['product_list'] = $product_list;
   $page = new Page('search.html', $page_vars);
 } elseif (isset($_GET['user'])) {
   $page_vars['page_title'] = 'User profile';
   $page_vars['user_email'] = $_SESSION['user']->email;
   $page = new Page('user.html', $page_vars);
+} elseif (isset($_GET['cart'])) {
+  // Are we adding an item to the cart?
+  if (isset($_POST['product_id'])) {
+    $product = $db->get_item($_POST['product_id']);
+    if ($product) {
+      $_SESSION['cart'][] = $product;
+      $_SESSION['notice'] = 'Item successfully added to cart.';
+      header('Location: ?cart');
+    } else {
+      $_SESSION['error'] = 'An error occurred while trying to add that item to your cart.';
+      header('Location: ?browse');
+    }
+  }
+  // Are we emptying the cart?
+  if (isset($_POST['empty_cart'])) {
+    unset($_SESSION['cart']);
+    header('Location: ?cart');
+  }
+  $product_list = '';
+  foreach ($_SESSION['cart'] as $product) {
+    $product_page = new Page('product_in_cart.html', array('product_name'        => $product->name,
+                                                           'product_description' => $product->description,
+                                                           'product_image_url'   => $product->image_url,
+                                                           'product_price'       => $product->price), false);
+    $product_list .= $product_page->html;
+  }
+  $page_vars['page_title'] = 'Shopping cart';
+  $page_vars['product_list'] = $product_list;
+  $page = new Page('cart.html', $page_vars);
 } else {
   $page_vars['page_title'] = 'Home';
   $page = new Page('index.html', $page_vars);

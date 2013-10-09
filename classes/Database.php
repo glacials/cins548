@@ -49,9 +49,10 @@ class Database {
   public function get_item($id) {
 	  $statement = $this->connection->prepare('SELECT item_id, item_name, image_url, item_description, item_price FROM Products WHERE item_id = ?');
 	  $statement->bind_param('i',$id);
-	  if ($statement->execute())
-		  return false;
-	  $statement->bind_results($item_id,$item_name,$image_url,$item_description,$item_price);
+    if (!$statement->execute())
+      return false;
+    $statement->bind_result($item_id, $item_name, $image_url,
+                             $item_description, $item_price);
 	  if ($statement->fetch() == NULL) {
 		  $statement->close();
 		  return false;
@@ -91,7 +92,7 @@ class Database {
     if (!$statement->execute())
       return false;
 
-    $statement->bind_results($product_id, $product_name, $product_image_url, $product_description, $product_price);
+    $statement->bind_result($product_id, $product_name, $product_image_url, $product_description, $product_price);
 
     while ($statement->fetch()) {
       $product = new Product($product_id, $product_name, $product_image_url, $product_description, $product_price);

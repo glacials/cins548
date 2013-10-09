@@ -3,6 +3,9 @@
   <img src="{product_img}" alt="{product_name}" class="img-thumbnail">
   <p>{product_description}</p>
   <h5>Price: ${product_price}</h5>
-  <button type="button" class="btn btn-primary">Add to cart</button>
+  <form action="?cart" method="post">
+    <input type="hidden" name="product_id" value="{product_id}">
+    <button type="submit" class="btn btn-primary">Add to cart</button>
+  </form>
   <br>
 </div>
