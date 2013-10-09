@@ -1,7 +1,11 @@
 # cins548
 
 ## db.sql
-All sample accounts in this database dump contain the password 'password'.
+MOST sample accounts in this database dump contain the password 'password'.
+Each User object also contains two reset columns, question and answer.
+	For the sample accounts contained in the DB dump, the reset question
+	is encrypted with the same salt and algorithm as the passwords.
+	The answers to the reset questions are 'greenish'.
 
 ## Notices and error messages
 To display a notice or an error message the next time a page is rendered to
