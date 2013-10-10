@@ -2,10 +2,10 @@
 <html>
 <body>
 <form>
-//needs validatation to only allow 10 numeric digits
+<!--needs validatation to only allow 10 numeric digits-->
 Mobile Number: <input type="m_number" name="mnumber">
 </form>
-//append suffix from drop down menu below and pass to database
+<!--append suffix from drop down menu below and pass to database-->
 <select>
   <option value="@txt.att.net">AT&T</option>
   <option value="@messaging.sprintpcs.com">Sprint</option>
