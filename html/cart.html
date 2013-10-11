@@ -13,7 +13,14 @@
       <th>$0.00</th>
     </tr>
   </table>
+  <table class="table">
+	  <tr>
   <form method="post" action="?cart">
-    <button type="submit" class="btn btn-danger" name="empty_cart">Empty cart</input>
-    </form>
+	  <button type="submit" class="btn btn-danger" name="empty_cart">Empty cart</button>
+  </form>
+  <form method="post" action="/checkout.php">
+	  <button type="submit" class="btn btn-primary" name="checkout">Checkout/Complete Transaction</button>
+  </form>
+  </tr>
+  </table>
 </div>
