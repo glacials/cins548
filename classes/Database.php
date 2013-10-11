@@ -156,6 +156,39 @@ class Database {
 	  // 1. Insert into the Purchase table with purchase_id, user_id, and systemdate.
 	  // 2. Query the database for the purchase_id that was created for the insert. (autoincrement).
 	  // 3. Insert item_ids into the Purchase_Items table.
+
+	  $statement = $this->connection->prepare('INSERT INTO Purchase (purchase_id, user_id, purchase_date) VALUES(0,?,?)');
+	  $date = date('Y-m-d H:i:s');
+	  $statement->bind_param('is',$user_id,$date);
+	  if(!$statement->execute()) {
+		  $statement->close();
+		  return false
+	  }
+	  else {
+		  $statment->close();
+		  $statement = $this->connection->prepare('SELECT purchase_id FROM Purchases WHERE (user_id = ? AND purchase_date = ?)');
+		  $statement->bind_param('is',$user_id,$date);
+		  if ($statement->execute()) {
+			  $statement->bind_result($generated_purchase_id);
+			  if ($statement->fetch() != true) {
+				  $statement->close();
+				  return false;
+			  }
+			  $statement->close();
+			  $statement = $this->connection->prepare('INSERT INTO Purchase_Items (purchase_id, item_id) VALUES (?,?)');
+			  foreach ($item_ids as $item_id) {
+				  $statement->bind_param('ii',$generated_purchase_id,$item_id);
+				  if (!$statement->execute()) {
+					  $statement->close();
+					  return false;
+				  }
+			  }
+			  $statement->close();
+			  return true;
+		  }
+		  else
+			  return false;
+	  }
   }
 
   /*
