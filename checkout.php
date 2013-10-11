@@ -15,12 +15,14 @@ else {
 		$_SESSION['notice'] = 'Cart is empty. Please add items to your cart.';
 		header('Location: /?browse');
 	}
+	else {
 	
-	if($_SESSION['user']->checkout($_SESSION['cart'])) {
-		# Reset cart to empty
-		$_SESSION['cart'] = array();
-		$_SESSION['notice'] = 'Thank you. your order has been processed, and will dispatch soon.';
-		header('Location: /?browse');
+		if($_SESSION['user']->checkout($_SESSION['cart'])) {
+			# Reset cart to empty
+			$_SESSION['cart'] = array();
+			$_SESSION['notice'] = 'Thank you. your order has been processed, and will dispatch soon.';
+			header('Location: /?browse');
+		}
 	}
 }
 
