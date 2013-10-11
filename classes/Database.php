@@ -148,6 +148,17 @@ class Database {
   }
 
   /*
+   * create purchase($user_id, $item_ids)
+   * This function will create a new Purchase in the database. It will insert data into the Purchases table
+   * along with the Purchase_Items table.
+   */
+  public function create_purchase($user_id, $item_ids) {
+	  // 1. Insert into the Purchase table with purchase_id, user_id, and systemdate.
+	  // 2. Query the database for the purchase_id that was created for the insert. (autoincrement).
+	  // 3. Insert item_ids into the Purchase_Items table.
+  }
+
+  /*
    * verify_creds($username, $password)
    * This function will check to see if the username and password are valid. Returns
    * user_id if valid, and FALSE if invalid.

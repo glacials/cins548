@@ -76,7 +76,19 @@ class User {
 		if ($param == 'update') {
 			// Haven't implemented fully.
 		}
-  }
+	}
+
+	/* checkout(array_of_products)
+	 * This function will be called when the user is ready to checkout.
+	 * This function will end up calling a "create_purchase" function in the 
+	 * Database class which will add the products and transaction information to the database.
+	 */
+
+	public function checkout($cart) {
+		$db = new Database;
+		// Not finished yet. Just laying it all out ATM.
+	}
+
 }
 
 ?>
