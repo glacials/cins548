@@ -153,6 +153,7 @@ class Database {
    * along with the Purchase_Items table.
    */
   public function create_purchase($user_id, $item_ids) {
+	  // TODO: NOT FULLY TESTED YET
 	  // 1. Insert into the Purchase table with purchase_id, user_id, and systemdate.
 	  // 2. Query the database for the purchase_id that was created for the insert. (autoincrement).
 	  // 3. Insert item_ids into the Purchase_Items table.
@@ -162,7 +163,7 @@ class Database {
 	  $statement->bind_param('is',$user_id,$date);
 	  if(!$statement->execute()) {
 		  $statement->close();
-		  return false
+		  return false;
 	  }
 	  else {
 		  $statment->close();
