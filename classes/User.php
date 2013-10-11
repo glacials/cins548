@@ -86,7 +86,12 @@ class User {
 
 	public function checkout($cart) {
 		$db = new Database;
-		// Not finished yet. Just laying it all out ATM.
+		$item_ids = array();
+		foreach ($cart as $item) {
+			array_push($item_ids, $item->id);
+		}
+		$db->create_purchase($this->id, $item_ids);
+		return true;
 	}
 
 }

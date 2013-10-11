@@ -158,7 +158,7 @@ class Database {
 	  // 2. Query the database for the purchase_id that was created for the insert. (autoincrement).
 	  // 3. Insert item_ids into the Purchase_Items table.
 
-	  $statement = $this->connection->prepare('INSERT INTO Purchase (purchase_id, user_id, purchase_date) VALUES(0,?,?)');
+	  $statement = $this->connection->prepare('INSERT INTO Purchases (purchase_id, user_id, purchase_date) VALUES(0,?,?)');
 	  $date = date('Y-m-d H:i:s');
 	  $statement->bind_param('is',$user_id,$date);
 	  if(!$statement->execute()) {
@@ -166,7 +166,6 @@ class Database {
 		  return false;
 	  }
 	  else {
-		  $statment->close();
 		  $statement = $this->connection->prepare('SELECT purchase_id FROM Purchases WHERE (user_id = ? AND purchase_date = ?)');
 		  $statement->bind_param('is',$user_id,$date);
 		  if ($statement->execute()) {
