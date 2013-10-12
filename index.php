@@ -88,12 +88,17 @@ if (isset($_GET['login'])) {
   $page = new Page('search.html', $page_vars);
 } elseif (isset($_GET['user'])) {
 	$purchase_list = '';
-	foreach ($_SESSION['user']->purchases() as $purchase) {
+	$purchases = $_SESSION['user']->purchases();
+	if ($purchases == false) {
+		$purchase_list = 'No Purchase History!';
+	} else {
+	foreach ($purchases as $purchase) {
 		$item = $db->get_item($purchase->item_id);
 		$purchase_page = new Page('purchase.html', array('purchase_id'	=> $purchase->purchase_id,
 								 'item_name' 	=> $item->name,
 								 'purchase_date'=> $purchase->date), false);
 		$purchase_list .= $purchase_page->html;
+	}
 	}
   $page_vars['page_title'] = 'User profile';
   $page_vars['purchase_list'] = $purchase_list;

@@ -21,11 +21,11 @@ if (empty($username)         || empty($password) ||
   header('Location: ?signup');
 } else {
   // Create new User object with variables, initialize data.
-  $user = new User(0, $username, $password, 0, $gender, $question, $answer, $address);
+  $user = new User(0, $username, $password, 0, $gender, 0, $question, $answer, $address);
   if ($user->save('insert')) {
-    $_SESSION['user'] = $user;
-    $_SESSION['notice'] = 'Account created!';
-    header('Location: ?');
+    // We are making them login so their user object will be updated (user_id, updated, etc.)
+    $_SESSION['notice'] = 'Account created! Please login.';
+    header('Location: ?login');
   } else {
     $_SESSION['error'] = 'There was a problem making your account. Please try again later.';
     header('Location: ?signup');
