@@ -30,7 +30,13 @@ if (isset($_SESSION['user'])) {
   $page_vars['rightnav_text_1'] = $_SESSION['user']->username;
   $page_vars['rightnav_url_2'] = '?logout';
   $page_vars['rightnav_text_2'] = 'Log out';
+  if ($_SESSION['user']->is_admin) {
+	  $page_vars['leftnav_url_1'] = '?admin';
+	  $page_vars['leftnav_text_1'] = 'Admin';
+  }
 } else {
+  $page_vars['leftnav_url_1'] = '';
+  $page_vars['leftnav_text_1'] = '';
   $page_vars['rightnav_url_1'] = '?login';
   $page_vars['rightnav_text_1'] = 'Log in';
   $page_vars['rightnav_url_2'] = '?signup';
