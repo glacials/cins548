@@ -71,7 +71,7 @@ if (isset($_GET['login'])) {
                                                    'product_price'       => $product->price), false);
     $product_list .= $product_page->html;
   }
-  $page_Vars['page_title'] = 'Browse items';
+  $page_vars['page_title'] = 'Browse items';
   $page_vars['product_list'] = $product_list;
   $page = new Page('browse.html', $page_vars);
 } elseif (isset($_GET['search'])) {
