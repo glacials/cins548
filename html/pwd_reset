@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+<form>
+<!--needs validatation to only allow 10 numeric digits-->
+Mobile Number: <input type="m_number" name="mnumber">
+
+<!--append suffix from drop down menu below and pass to database-->
+Service Provider:
+<select>
+  <option value="@txt.att.net">AT&T</option>
+  <option value="@messaging.sprintpcs.com">Sprint</option>
+  <option value="@tmomail.net">T-Mobile</option>
+  <option value="@vtext.com">Verizon</option>
+</select>
+</form>  
+</body>
+</html>

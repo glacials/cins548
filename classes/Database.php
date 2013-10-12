@@ -148,6 +148,50 @@ class Database {
   }
 
   /*
+   * create purchase($user_id, $item_ids)
+   * This function will create a new Purchase in the database. It will insert data into the Purchases table
+   * along with the Purchase_Items table.
+   */
+  public function create_purchase($user_id, $item_ids) {
+	  // TODO: NOT FULLY TESTED YET
+	  // 1. Insert into the Purchase table with purchase_id, user_id, and systemdate.
+	  // 2. Query the database for the purchase_id that was created for the insert. (autoincrement).
+	  // 3. Insert item_ids into the Purchase_Items table.
+
+	  $statement = $this->connection->prepare('INSERT INTO Purchases (purchase_id, user_id, purchase_date) VALUES(0,?,?)');
+	  $date = date('Y-m-d H:i:s');
+	  $statement->bind_param('is',$user_id,$date);
+	  if(!$statement->execute()) {
+		  $statement->close();
+		  return false;
+	  }
+	  else {
+		  $statement = $this->connection->prepare('SELECT purchase_id FROM Purchases WHERE (user_id = ? AND purchase_date = ?)');
+		  $statement->bind_param('is',$user_id,$date);
+		  if ($statement->execute()) {
+			  $statement->bind_result($generated_purchase_id);
+			  if ($statement->fetch() != true) {
+				  $statement->close();
+				  return false;
+			  }
+			  $statement->close();
+			  $statement = $this->connection->prepare('INSERT INTO Purchase_Items (purchase_id, item_id) VALUES (?,?)');
+			  foreach ($item_ids as $item_id) {
+				  $statement->bind_param('ii',$generated_purchase_id,$item_id);
+				  if (!$statement->execute()) {
+					  $statement->close();
+					  return false;
+				  }
+			  }
+			  $statement->close();
+			  return true;
+		  }
+		  else
+			  return false;
+	  }
+  }
+
+  /*
    * verify_creds($username, $password)
    * This function will check to see if the username and password are valid. Returns
    * user_id if valid, and FALSE if invalid.
