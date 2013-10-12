@@ -94,6 +94,17 @@ class User {
 		return true;
 	}
 
+	/*purchase_history()
+	 * This function will return an array of data that pertains to all transactions
+	 * for the particular user. Array will contain purchase objects.
+	 */
+
+	public function purchase_history() {
+		$db = new Database;
+		$products = $db->get_purchases($this->id);
+		return $products;
+	}
+
 }
 
 ?>

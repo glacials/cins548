@@ -87,8 +87,17 @@ if (isset($_GET['login'])) {
   $page_vars['product_list'] = $product_list;
   $page = new Page('search.html', $page_vars);
 } elseif (isset($_GET['user'])) {
+	$purchase_list = '';
+	foreach ($db->get_purchases($_SESSION['user']->id) as $purchase) {
+		$item = $db->get_item($purchase->item_id);
+		$purchase_page = new Page('purchase.html', array('purchase_id'	=> $purchase->purchase_id,
+								 'item_name' 	=> $item->name,
+								 'purchase_date'=> $purchase->date), false);
+		$purchase_list .= $purchase_page->html;
+	}
   $page_vars['page_title'] = 'User profile';
-  $page_vars['user_email'] = $_SESSION['user']->email;
+  $page_vars['purchase_list'] = $purchase_list;
+  $page_vars['user_email'] = $_SESSION['user']->username;
   $page = new Page('user.html', $page_vars);
 } elseif (isset($_GET['cart'])) {
   // Are we adding an item to the cart?

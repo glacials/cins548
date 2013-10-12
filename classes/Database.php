@@ -48,16 +48,21 @@ class Database {
    */
   public function get_item($id) {
 	  $statement = $this->connection->prepare('SELECT item_id, item_name, image_url, item_description, item_price FROM Products WHERE item_id = ?');
-	  $statement->bind_param('i',$id);
-    if (!$statement->execute())
-      return false;
-    $statement->bind_result($item_id, $item_name, $image_url,
-                             $item_description, $item_price);
-	  if ($statement->fetch() == NULL) {
-		  $statement->close();
-		  return false;
+	  $statement->bind_param('i', $id);
+	  if ($statement->execute()) {
+		  $statement->bind_result($item_id, $item_name, $image_url, $item_description, $item_price);
+		  if ($statement->fetch() == NULL) {
+			  $statement->close();
+			  return false;
+		  }
+		  else {
+			  $statement->close();
+			  $product = new Product($item_id, $item_name, $image_url, $item_description, $item_price);
+			  return $product;
+		  }
 	  }
-	  return new Product($item_id,$item_name,$image_url,$item_description,$item_price);
+	  $statment->close();
+	  return false;
   }
 
   /*get_all_products()
@@ -111,12 +116,12 @@ class Database {
    */
   public function get_purchases($user_id) {
 	  // TODO: Not tested yet.
-	  $statement = $this->connection->prepare('SELECT purchase_id, user_id, item_id, purchase_date FROM Purchases WHERE user_id = ?');
+	  $statement = $this->connection->prepare('SELECT Purchases.purchase_id, Purchases.user_id, Purchase_Items.item_id, purchase_date FROM Purchases JOIN Purchase_Items ON Purchases.purchase_id = Purchase_Items.purchase_id WHERE user_id = ?');
 	  $statement->bind_param('i',$user_id);
 	  if (!$statement->execute()) {
 		  return false;
 	  }
-	  $statement->bind_results($returned_purchase_id, $returned_user_id, $returned_item_id, $returned_purchase_date);
+	  $statement->bind_result($returned_purchase_id, $returned_user_id, $returned_item_id, $returned_purchase_date);
 
 	  $array_of_puchases = array();
 
