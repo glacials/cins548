@@ -119,7 +119,11 @@ if (isset($_GET['login'])) {
   $page_vars['page_title'] = 'Shopping cart';
   $page_vars['product_list'] = $product_list;
   $page = new Page('cart.html', $page_vars);
-} else {
+} elseif (isset($_GET['admin']) and $_SESSION['user']->is_admin) {
+	//...
+	$page_vars['page_title'] = 'Admin Area';
+	$page = new Page('admin.html', $page_vars);
+  }else {
   $page_vars['page_title'] = 'Home';
   $page = new Page('index.html', $page_vars);
 }
