@@ -1,16 +1,16 @@
   <ul class="media-list" style="background-color: #e5e5e5;padding:10px;border-radius:5px;">
-	  <li class="media">
-	  <a class="pull-left">
-		  <img class="media-object" src="{product_img}" alt="{product_name">
-	  </a>
-	  <div class="media-body">
-		  <h4>{product_name}</h4>
-		  <p style="text-align:justify">{product_description}</p>
-		  <h4>Price: $ {product_price}</h4>
-		  <form action="?cart" method="post">
-			  <input type="hidden" name="product_id" value="{product_id}">
-			  <button type="submit" class="btn btn-primary">Add to cart</button>
-		  </form>
-	  </div>
-	  </li>
+    <li class="media">
+    <a class="pull-left">
+      <img class="media-object" src="{product_img}" alt="{product_name">
+    </a>
+    <div class="media-body">
+      <h4>{product_name}</h4>
+      <p style="text-align:justify">{product_description}</p>
+      <h4>Price: $ {product_price}</h4>
+      <form action="?cart" method="post">
+        <input type="hidden" name="product_id" value="{product_id}">
+        <button type="submit" class="btn btn-primary">Add to cart</button>
+      </form>
+    </div>
+    </li>
   </ul>

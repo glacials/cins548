@@ -1,4 +1,12 @@
 <tr>
   <td>{product_name}</td>
-  <td>${product_price}</td>
+  <td><span class="pull-right">${product_price}</span></td>
+  <td>
+    <form action="?cart" method="post">
+      <input type="hidden" name="product_id" value="${product_id}">
+      <button type="submit" class="btn btn-warning pull-right" name="remove_item">
+        <small>Remove</small>
+      </button>
+    </form>
+  </td>
 </tr>

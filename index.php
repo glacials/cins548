@@ -101,7 +101,7 @@ if (isset($_GET['login'])) {
   $page = new Page('user.html', $page_vars);
 } elseif (isset($_GET['cart'])) {
   // Are we adding an item to the cart?
-  if (isset($_POST['product_id'])) {
+  if (isset($_POST['add_to_cart'])) {
     $product = $db->get_item($_POST['product_id']);
     if ($product) {
       $_SESSION['cart'][] = $product;
@@ -117,9 +117,16 @@ if (isset($_GET['login'])) {
     unset($_SESSION['cart']);
     header('Location: ?cart');
   }
+  if (isset($_POST['remove_item'])) {
+    foreach ($_SESSION['cart'] as $key => $product)
+      if ($product == $db->get_item($_POST['product_id']))
+        unset($_SESSION['cart'][$key]);
+    header('Location: ?cart');
+  }
   $product_list = '';
   foreach ($_SESSION['cart'] as $product) {
-    $product_page = new Page('product_in_cart.html', array('product_name'        => $product->name,
+    $product_page = new Page('product_in_cart.html', array('product_id'          => $product->id,
+                                                           'product_name'        => $product->name,
                                                            'product_description' => $product->description,
                                                            'product_image_url'   => $product->image_url,
                                                            'product_price'       => $product->price), false);
