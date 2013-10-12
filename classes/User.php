@@ -10,13 +10,15 @@ class User {
 	private $reset_answer;
 	private $address;
 	private $gender;
+	private $updated;
 
-	public function __construct($Id, $Username, $Password_hash, $Is_admin, $Gender, $Reset_question, $Reset_answer, $Address) {
+	public function __construct($Id, $Username, $Password_hash, $Is_admin, $Gender, $Updated, $Reset_question, $Reset_answer, $Address) {
 		$this->id = $Id;
 		$this->username = $Username;
 		$this->password_hash = $Password_hash;
 		$this->is_admin = $Is_admin;
 		$this->gender = $Gender;
+		$this->updated = $Updated;
 		$this->reset_question = $Reset_question;
 		$this->reset_answer = $Reset_answer;
 		$this->address = $Address;
@@ -30,7 +32,7 @@ class User {
    * accessed like this with the $allowed_vars array below.
    */
   public function __get($var) {
-    $allowed_vars = array('id', 'username', 'is_admin', 'gender', 'reset_question', 'address');
+    $allowed_vars = array('id', 'username', 'is_admin', 'gender', 'updated', 'reset_question', 'address');
     if (in_array($var, $allowed_vars))
       return $this->$var;
     else

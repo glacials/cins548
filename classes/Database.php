@@ -13,12 +13,12 @@ class Database {
    */
   public function get_user($id) {
     // TODO: This ain't tested yet
-	  $statement = $this->connection->prepare('SELECT user_id, username, password_hash, is_admin, gender, reset_question, reset_answer, address FROM Users WHERE user_id=?');
+	  $statement = $this->connection->prepare('SELECT user_id, username, password_hash, is_admin, gender, updated, reset_question, reset_answer, address FROM Users WHERE user_id=?');
     $statement->bind_param('i', $id);
     if ($statement->execute()) {
-      $statement->bind_result($id, $username, $password_hash, $is_admin, $gender, $reset_question, $reset_answer, $address);
+      $statement->bind_result($id, $username, $password_hash, $is_admin, $gender, $updated, $reset_question, $reset_answer, $address);
       $statement->fetch();
-      return new User($id, $username, $password_hash, $is_admin, $gender, $reset_question, $reset_answer, $address);
+      return new User($id, $username, $password_hash, $is_admin, $gender, $updated, $reset_question, $reset_answer, $address);
     }
     return false;
   }
@@ -215,6 +215,27 @@ class Database {
 		  }
 	  }
 	  $statement->close();
+  }
+
+  /*
+   * get_all_users()
+   * This function will be used to get a list of all user objects that are stored in
+   * the database. This will be used when the admin page requests all of the users.
+   */
+  public function get_all_users() {
+	  $statement = $this->connection->prepare('SELECT user_id, username, password_hash, is_admin, gender, updated, reset_question, reset_answer, address FROM Users');
+	  if ($statement->execute()) {
+		  $statement->bind_result($user_id, $username, $password_hash, $is_admin, $gender, $updated, $reset_question, $reset_answer, $address);
+		  $users = array();
+		  while ($statement->fetch()) {
+			  $user = new User($user_id, $username, $password_hash, $is_admin, $gender, $updated, $reset_question, $reset_answer, $address);
+			  array_push($users, $user);
+		  }
+		  return $users;
+	  }
+	  else {
+		  return false;
+	  }
   }
 }
 ?>

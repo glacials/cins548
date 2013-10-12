@@ -101,8 +101,9 @@ if (isset($_GET['login'])) {
   $page = new Page('user.html', $page_vars);
 } elseif (isset($_GET['cart'])) {
   // Are we adding an item to the cart?
-  if (isset($_POST['add_to_cart'])) {
-    $product = $db->get_item($_POST['product_id']);
+  // add_to_cart ---> product_id
+  if (isset($_POST['product_id'])) {
+      $product = $db->get_item($_POST['product_id']);
     if ($product) {
       $_SESSION['cart'][] = $product;
       $_SESSION['notice'] = 'Item successfully added to cart.';
@@ -136,7 +137,19 @@ if (isset($_GET['login'])) {
   $page_vars['product_list'] = $product_list;
   $page = new Page('cart.html', $page_vars);
 } elseif (isset($_GET['admin']) and $_SESSION['user']->is_admin) {
-	//...
+	$user_list = '';
+	$users = $db->get_all_users();
+	foreach ($users as $user) {
+		$user_page = new Page('user_item.html', array('user_id'	=> $user->id,
+							      'username'=> $user->username,
+							      'is_admin'=> $user->is_admin,
+							      'gender'	=> $user->gender,
+							      'updated' => $user->updated,
+							      'reset_question' => $user->reset_question,
+							      'address' => $user->address), false);
+		$user_list .= $user_page->html;
+	}
+	$page_vars['user_list'] = $user_list;
 	$page_vars['page_title'] = 'Admin Area';
 	$page = new Page('admin.html', $page_vars);
   }else {
