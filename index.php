@@ -88,7 +88,7 @@ if (isset($_GET['login'])) {
   $page = new Page('search.html', $page_vars);
 } elseif (isset($_GET['user'])) {
 	$purchase_list = '';
-	foreach ($db->get_purchases($_SESSION['user']->id) as $purchase) {
+	foreach ($_SESSION['user']->purchases() as $purchase) {
 		$item = $db->get_item($purchase->item_id);
 		$purchase_page = new Page('purchase.html', array('purchase_id'	=> $purchase->purchase_id,
 								 'item_name' 	=> $item->name,

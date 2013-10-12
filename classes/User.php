@@ -54,6 +54,7 @@ class User {
 	 */
 	public function purchases() {
 		// TODO: Not tested yet.
+		$db = new Database;
 		return $db->get_purchases($this->id);
 	}
 
