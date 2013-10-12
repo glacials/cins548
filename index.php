@@ -33,6 +33,9 @@ if (isset($_SESSION['user'])) {
   if ($_SESSION['user']->is_admin) {
 	  $page_vars['leftnav_url_1'] = '?admin';
 	  $page_vars['leftnav_text_1'] = 'Admin';
+  } else {
+	  $page_vars['leftnav_url_1'] = '';
+	  $page_vars['leftnav_text_1'] = '';
   }
 } else {
   $page_vars['leftnav_url_1'] = '';
