@@ -145,13 +145,13 @@ if (isset($_GET['login'])) {
 	$user_list = '';
 	$users = $db->get_all_users();
 	foreach ($users as $user) {
-		$user_page = new Page('user_item.html', array('user_id'	=> $user->id,
-							      'username'=> $user->username,
-							      'is_admin'=> $user->is_admin,
-							      'gender'	=> $user->gender,
-							      'updated' => $user->updated,
-							      'reset_question' => $user->reset_question,
-							      'address' => $user->address), false);
+		$user_page = new Page('user_item.html', array('user_id'	=> htmlspecialchars($user->id,ENT_QUOTES),
+							      'username'=> htmlspecialchars($user->username,ENT_QUOTES),
+							      'is_admin'=> htmlspecialchars($user->is_admin,ENT_QUOTES),
+							      'gender'	=> htmlspecialchars($user->gender,ENT_QUOTES),
+							      'updated' => htmlspecialchars($user->updated,ENT_QUOTES),
+							      'reset_question' => htmlspecialchars($user->reset_question,ENT_QUOTES),
+							      'address' => htmlspecialchars($user->address,ENT_QUOTES)),false);
 		$user_list .= $user_page->html;
 	}
 	$page_vars['user_list'] = $user_list;
