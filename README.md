@@ -1,5 +1,10 @@
 # cins548
 
+## To Do
+1.	Give users the ability to update and change ALL of their private information.
+2.	Create the ability to reset passwords via challenge question.
+3.	Give admins the ability to edit all information that belongs to registered users.
+
 ## db.sql
 MOST sample accounts in this database dump contain the password 'password'.
 Each User object also contains two reset columns, question and answer.
