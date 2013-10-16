@@ -25,6 +25,7 @@ $db = new Database;
 $update_data = array('id' => $_POST['user_id'],
 		     'username' => $_POST['email'],
 		     'password_hash' => $_POST['password'],
+		     'is_admin' => '', // We always want the value from the DB.
 		     'address' => $_POST['address'],
 		     'reset_question' => $_POST['question'],
 		     'gender' => $_POST['gender'],
@@ -37,6 +38,11 @@ if (!empty($_POST['password'])) {
 	$update_data['password_hash'] = crypt($_POST['password'], 'dLp#32A');
 }
 
+# Handling if reset_answer is going to be updated.
+if (!empty($_POST['answer'])) {
+	$update_data['reset_answer'] = crypt($_POST['answer'], 'dLp#32A');
+}
+
 # We only want to update fields that are NOT blank.
 foreach($update_data as $key => $value) {
 	if (empty($update_data[$key])) {
@@ -45,9 +51,9 @@ foreach($update_data as $key => $value) {
 }
 
 # Creating our updated object.
-$new_obj = new User($update_data['id'], $update_data['username'], $update_data['password_hash'],
-	0, $update_data['gender'], date('Y-m-d H:i:s'), $update_data['reset_question'],
-	$update_data['reset_answer'], $update_data['address']);
+$new_obj = new User($update_data['id'], $update_data['username'], $update_data['password_hash'], $update_data['is_admin'],
+		    $update_data['gender'], date('Y-m-d H:i:s'), $update_data['reset_question'],
+		    $update_data['reset_answer'], $update_data['address']);
 
 # Check to see if username has already been taken, if they are updating it.
 if(!empty($_POST['username']) and $db->username_exists($new_obj->username)) {
@@ -57,6 +63,8 @@ if(!empty($_POST['username']) and $db->username_exists($new_obj->username)) {
 	if($new_obj->save('update')) {
 		// Update Session data if regular user updates their own account.
 		if ($_SESSION['user']->is_admin == 0) {
+			$_SESSION['user'] = $db->get_user($_SESSION['user']->id);
+		} elseif($_SESSION['user']->id == $user->id) {
 			$_SESSION['user'] = $db->get_user($_SESSION['user']->id);
 		}
 		$_SESSION['notice'] = 'Account successfully updated.';
