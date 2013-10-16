@@ -32,7 +32,7 @@ class User {
    * accessed like this with the $allowed_vars array below.
    */
   public function __get($var) {
-    $allowed_vars = array('id', 'password_hash', 'username', 'is_admin', 'gender', 'updated', 'reset_question', 'address');
+    $allowed_vars = array('id', 'password_hash', 'username', 'is_admin', 'gender', 'updated', 'reset_question', 'reset_answer', 'address');
     if (in_array($var, $allowed_vars))
       return $this->$var;
     else
