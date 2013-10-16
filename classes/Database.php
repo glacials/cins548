@@ -12,7 +12,6 @@ class Database {
    * Returns a User object with ID $id. If no such user exists, returns false.
    */
   public function get_user($id) {
-    // TODO: This ain't tested yet
 	  $statement = $this->connection->prepare('SELECT user_id, username, password_hash, is_admin, gender, updated, reset_question, reset_answer, address FROM Users WHERE user_id=?');
     $statement->bind_param('i', $id);
     if ($statement->execute()) {
@@ -29,7 +28,6 @@ class Database {
    * Useful when adding NEW users to webapp.
    */
   public function username_exists($username) {
-	  // TODO: Not tested yet.
 	  $statement = $this->connection->prepare('SELECT username FROM Users WHERE username = ?');
 	  $statement->bind_param('s', $username);
 	  if (!$statement->execute())
