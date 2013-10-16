@@ -100,9 +100,13 @@ if (isset($_GET['login'])) {
 		$purchase_list .= $purchase_page->html;
 	}
 	}
-  $page_vars['page_title'] = 'User profile';
+  $page_vars['page_title'] = 'User Profile';
   $page_vars['purchase_list'] = $purchase_list;
   $page_vars['user_email'] = $_SESSION['user']->username;
+  $page_vars['address'] = $_SESSION['user']->address;
+  $page_vars['reset_question'] = $_SESSION['user']->reset_question;
+  $page_vars['gender'] = $_SESSION['user']->gender;
+  $page_vars['updated'] = $_SESSION['user']->updated;
   $page = new Page('user.html', $page_vars);
 } elseif (isset($_GET['cart'])) {
   // Are we adding an item to the cart?
@@ -157,7 +161,28 @@ if (isset($_GET['login'])) {
 	$page_vars['user_list'] = $user_list;
 	$page_vars['page_title'] = 'Admin Area';
 	$page = new Page('admin.html', $page_vars);
-  }else {
+} elseif (isset($_GET['alter_user']) and isset($_SESSION['user'])) {
+	if ($_SESSION['user']->is_admin and isset($_POST['user_id'])) {
+		$user_id_update = $_POST['user_id'];
+	} else {
+
+		$user_id_update = $_SESSION['user']->id;
+	}
+
+		$user_to_update = $db->get_user($user_id_update);
+
+	if($user_to_update != false) {
+		$temp_array =array('page_title' => 'Alter User',
+				   'user_id' => htmlspecialchars($user_to_update->id,ENT_QUOTES),
+				   'username'=> htmlspecialchars($user_to_update->username,ENT_QUOTES),
+				   'is_admin'=> htmlspecialchars($user_to_update->gender,ENT_QUOTES),
+				   'updated' => htmlspecialchars($user_to_update->updated,ENT_QUOTES),
+				   'reset_question' => htmlspecialchars($user_to_update->reset_question,ENT_QUOTES),
+				   'address' => htmlspecialchars($user_to_update->address,ENT_QUOTES));
+		$page_vars = array_merge($page_vars, $temp_array);
+		$page = new Page('alter_user.html',$page_vars);
+		}
+} else {
   $page_vars['page_title'] = 'Home';
   $page = new Page('index.html', $page_vars);
 }
