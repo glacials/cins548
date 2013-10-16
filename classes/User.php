@@ -53,7 +53,6 @@ class User {
 	 * Ex:	$purchases =  $user_obj->purchases()
 	 */
 	public function purchases() {
-		// TODO: Not tested yet.
 		$db = new Database;
 		return $db->get_purchases($this->id);
 	}

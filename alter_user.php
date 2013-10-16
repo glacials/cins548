@@ -31,6 +31,12 @@ $update_data = array('id' => $_POST['user_id'],
 		     'gender' => $_POST['gender'],
 		     'reset_answer' => $_POST['answer']);
 
+# Making sure user isn't being bad and changing hidden field in the form.
+if ($_SESSION['user']->is_admin == 0 and ($_SESSION['user']->id != $_POST['id'])) {
+	$_SESSION['error'] = 'There was a problem updating your account.';
+	header('Location: /?alter_user');
+} else {
+
 $user = $db->get_user($update_data['id']);
 
 # Handling if password is going to be updated.
@@ -52,8 +58,8 @@ foreach($update_data as $key => $value) {
 
 # Creating our updated object.
 $new_obj = new User($update_data['id'], $update_data['username'], $update_data['password_hash'], $update_data['is_admin'],
-		    $update_data['gender'], date('Y-m-d H:i:s'), $update_data['reset_question'],
-		    $update_data['reset_answer'], $update_data['address']);
+		    $update_data['gender'], date('Y-m-d H:i:s'), $update_data['reset_question'],$update_data['reset_answer'],
+		    $update_data['address']);
 
 # Check to see if username has already been taken, if they are updating it.
 if(!empty($_POST['username']) and $db->username_exists($new_obj->username)) {
@@ -73,5 +79,6 @@ if(!empty($_POST['username']) and $db->username_exists($new_obj->username)) {
 		$_SESSION['error'] = 'There was a problem updating your account.';
 		header('Location: /?user');
 	}
+}
 }
 ?>
