@@ -77,7 +77,7 @@ class User {
 		// This section is for updating a user. Used with the page where admins/users can
 		// change their personal data.
 		if ($param == 'update') {
-			// Haven't implemented fully.
+			return $db->update_user($this->id, $this->username, $this->password_hash, $this->is_admin, $this->gender, $this->updated, $this->reset_question, $this->reset_answer, $this->address);
 		}
 	}
 

@@ -24,13 +24,18 @@ $db = new Database;
 # capturing data from POST...
 $update_data = array('id' => $_POST['user_id'],
 		     'username' => $_POST['email'],
-		     'password_hash' => crypt($_POST['password'], 'dLp#32A'),
+		     'password_hash' => $_POST['password'],
 		     'address' => $_POST['address'],
 		     'reset_question' => $_POST['question'],
 		     'gender' => $_POST['gender'],
 		     'reset_answer' => $_POST['answer']);
 
 $user = $db->get_user($update_data['id']);
+
+# Handling if password is going to be updated.
+if (!empty($_POST['password'])) {
+	$update_data['password_hash'] = crypt($_POST['password'], 'dLp#32A');
+}
 
 # We only want to update fields that are NOT blank.
 foreach($update_data as $key => $value) {
@@ -50,6 +55,10 @@ if(!empty($_POST['username']) and $db->username_exists($new_obj->username)) {
 	header('Location: /?alter_user');
 } else {
 	if($new_obj->save('update')) {
+		// Update Session data if regular user updates their own account.
+		if ($_SESSION['user']->is_admin == 0) {
+			$_SESSION['user'] = $db->get_user($_SESSION['user']->id);
+		}
 		$_SESSION['notice'] = 'Account successfully updated.';
 		header('Location: /?user');
 	} else {

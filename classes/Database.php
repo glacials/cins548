@@ -135,6 +135,22 @@ class Database {
   }
 
   /*
+   * update_user($id, $username, $password, etc...)
+   * This function will be used when a user is updated in the database.
+   * It will take an arguement for each element pertaining to a user,
+   * and update that record in the database.
+   */
+  public function update_user($id, $username, $password, $is_admin, $gender, $updated, $reset_question, $reset_answer, $address) {
+	  $statement = $this->connection->prepare('UPDATE Users SET username=?, password_hash=?, is_admin=?, gender=?, updated=?, reset_question=?, reset_answer=?, address=? WHERE user_id=?');
+	  $statement->bind_param('ssissssss',$username,$password,$is_admin,$gender,$updated,$reset_question,$reset_answer,$address,$id);
+	  if ($statement->execute()) {
+		  return true;
+	  } else {
+		  return false;
+	  }
+  }
+
+  /*
    * insert_user($id, $username, $password, $is_admin)
    * This function will simply insert this data in to the user tabe in the database. This function will be used when the user
    * try to enroll with our webapp.
