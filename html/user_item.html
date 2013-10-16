@@ -6,4 +6,10 @@
 	<td>{updated}</td>
 	<td>{reset_question}</td>
 	<td>{address}</td>
+	<td>
+		<form action="/?alter_user" method="post">
+			<input type="hidden" name="user_id" value="{user_id}">
+			<button type="submit" class="btn btn-default">Alter User</button>
+	    	</form>
+	</td>
 </tr>
