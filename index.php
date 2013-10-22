@@ -182,6 +182,9 @@ if (isset($_GET['login'])) {
 		$page_vars = array_merge($page_vars, $temp_array);
 		$page = new Page('alter_user.html',$page_vars);
 		}
+} elseif (isset($_GET['forgot'])) {
+	$page_vars['page_title'] = 'Forgot Password';
+	$page = new Page('forgot.html', $page_vars);
 } else {
   $page_vars['page_title'] = 'Home';
   $page = new Page('index.html', $page_vars);
