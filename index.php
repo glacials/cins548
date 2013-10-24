@@ -193,6 +193,8 @@ if (isset($_GET['login'])) {
 } elseif (isset($_GET['reset']) and isset($_SESSION['forgotten_user']) and isset($_SESSION['challenge_accepted'])) {
 	$page_vars['page_title'] = 'Reset Password';
 	$page = new Page('reset_password.html', $page_vars);
+} elseif (isset($_GET['checkout'])) {
+  require_once 'checkout.php';
 } else {
   $page_vars['page_title'] = 'Home';
   $page = new Page('index.html', $page_vars);
