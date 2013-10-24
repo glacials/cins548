@@ -1,9 +1,10 @@
 # cins548
 
 ## To Do
-1.	Create the ability to reset passwords via challenge question.
-2.	DONE---Give users the ability to update and change ALL of their private information.
-3.	DONE---Give admins the ability to edit all information that belongs to registered users.
+1.	Check for XSS vulnerabilities etc.
+2.	DONE---Create the ability to reset passwords via challenge question.
+3.	DONE---Give users the ability to update and change ALL of their private information.
+4.	DONE---Give admins the ability to edit all information that belongs to registered users.
 
 ## db.sql
 MOST sample accounts in this database dump contain the password 'password'.
