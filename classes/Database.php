@@ -232,6 +232,27 @@ class Database {
   }
 
   /*
+   * This function will take a username as input, and return the user object
+   * associated with that username. Used when resetting passwords.
+   */
+
+  public function get_user_from_username($username) {
+	  $user_id = '';
+	  $statement = $this->connection->prepare('SELECT user_id FROM Users WHERE username=?');
+	  $statement->bind_param('s', $username);
+	  if ($statement->execute()) {
+		  $statement->bind_result($user_id);
+		  if ($statement->fetch()) {
+			  $statement->close();
+			  $user_obj = $this->get_user($user_id);
+			  return $user_obj;
+		  }
+	  }
+	  $statement->close();
+	  return false;
+  }
+
+  /*
    * get_all_users()
    * This function will be used to get a list of all user objects that are stored in
    * the database. This will be used when the admin page requests all of the users.
