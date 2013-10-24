@@ -17,7 +17,7 @@ $forgotten_user = $db->get_user_from_username($_POST['email']);
 
 if($forgotten_user) {
 	$_SESSION['forgotten_user'] = $forgotten_user;
-	header('Location: /?reset');
+	header('Location: /?reset_challenge');
 }
 else {
 	$_SESSION['error'] = 'Error, retriving account details';
