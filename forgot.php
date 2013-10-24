@@ -11,6 +11,9 @@
 session_start();
 require_once 'autoload.php';
 
+// Clearing out old attempts
+unset($_SESSION['forgotten_user']);
+
 $db = new Database;
 
 $forgotten_user = $db->get_user_from_username($_POST['email']);
