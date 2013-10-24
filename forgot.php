@@ -8,8 +8,8 @@
  * $_SESSION[forgotten_user'].
  */
 
-session_start();
 require_once 'autoload.php';
+session_start();
 
 // Clearing out old attempts
 unset($_SESSION['forgotten_user']);
@@ -18,7 +18,7 @@ $db = new Database;
 
 $forgotten_user = $db->get_user_from_username($_POST['email']);
 
-if($forgotten_user) {
+if($forgotten_user != false) {
 	$_SESSION['forgotten_user'] = $forgotten_user;
 	header('Location: /?reset_challenge');
 }

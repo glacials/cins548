@@ -190,7 +190,10 @@ if (isset($_GET['login'])) {
 	$vars = array('question' => htmlspecialchars($_SESSION['forgotten_user']->reset_question, ENT_QUOTES));
 	$page_vars = array_merge($page_vars, $vars);
 	$page = new Page('challenge.html', $page_vars);
-}else {
+} elseif (isset($_GET['reset']) and isset($_SESSION['forgotten_user']) and isset($_SESSION['challenge_accepted'])) {
+	$page_vars['page_title'] = 'Reset Password';
+	$page = new Page('reset_password.html', $page_vars);
+} else {
   $page_vars['page_title'] = 'Home';
   $page = new Page('index.html', $page_vars);
 }
