@@ -111,7 +111,7 @@ if (isset($_GET['login'])) {
 } elseif (isset($_GET['cart'])) {
   // Are we adding an item to the cart?
   // add_to_cart ---> product_id
-  if (isset($_POST['product_id'])) {
+  if (isset($_POST['add_item'])) {
       $product = $db->get_item($_POST['product_id']);
     if ($product) {
       $_SESSION['cart'][] = $product;
@@ -131,6 +131,7 @@ if (isset($_GET['login'])) {
     foreach ($_SESSION['cart'] as $key => $product)
       if ($product == $db->get_item($_POST['product_id']))
         unset($_SESSION['cart'][$key]);
+    $_SESSION['notice'] = 'Item successfully removed from cart.';
     header('Location: ?cart');
   }
   $product_list = '';
