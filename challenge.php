@@ -3,7 +3,7 @@
 include_once 'autoload.php';
 session_start();
 
-$crypt_answer = crypt($_POST['answer'],'dLp#32A');
+$crypt_answer = hash("sha256",$_POST['answer'].'alPha548*3jasc');
 
 if (isset($_SESSION['forgotten_user'])) {
 	if ($_SESSION['forgotten_user']->reset_answer == $crypt_answer) {

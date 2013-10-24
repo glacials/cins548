@@ -8,7 +8,7 @@ if (isset($_SESSION['challenge_accepted'])) {
 		$_SESSION['error'] = 'Your password\'s must match';
 		header('Location: /?reset');
 	}else{
-		$password = crypt($_POST['password'], 'dLp#32A');
+		$password = hash("sha256",$_POST['password'] . 'alPha548*3jasc');
 		$old_user = $_SESSION['forgotten_user'];
 
 		// Creating an updated User object.

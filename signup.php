@@ -4,11 +4,11 @@ require_once 'autoload.php';
 
 // Setting variables...
 $username = $_POST['email'];
-$password = crypt($_POST['password'],'dLp#32A');
-$password_confirm = crypt($_POST['password'],'dLp#32A');
+$password = hash("sha256", $_POST['password'] . 'alPha548*3jasc');
+$password_confirm = hash("sha256", $_POST['password'] . 'alPha548*3jasc');
 $gender = $_POST['gender'];
 $question = $_POST['question'];
-$answer = crypt($_POST['answer'],'dLp#32A');
+$answer = hash("sha256", $_POST['answer'] . 'alPha548*3jasc');
 $address = $_POST['address'];
 
 // Redirect back to signup page if any of the fields are empty, or if the passwords don't match each other.

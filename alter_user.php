@@ -41,12 +41,12 @@ $user = $db->get_user($update_data['id']);
 
 # Handling if password is going to be updated.
 if (!empty($_POST['password'])) {
-	$update_data['password_hash'] = crypt($_POST['password'], 'dLp#32A');
+	$update_data['password_hash'] = hash("sha256", $_POST['password'] . 'alPha548*3jasc');
 }
 
 # Handling if reset_answer is going to be updated.
 if (!empty($_POST['answer'])) {
-	$update_data['reset_answer'] = crypt($_POST['answer'], 'dLp#32A');
+	$update_data['reset_answer'] = hash("sha256",$_POST['answer'] . 'alPha548*3jasc');
 }
 
 # We only want to update fields that are NOT blank.
