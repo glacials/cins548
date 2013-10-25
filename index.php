@@ -76,7 +76,7 @@ if (isset($_GET['login'])) {
   $page = new Page('browse.html', $page_vars);
 } elseif (isset($_GET['search'])) {
   $product_list = '';
-  foreach (Product::get_products_like($_GET['search']) as $product) {
+  foreach ($db->get_products_like($_GET['search']) as $product) {
     $product_page = new Page('product.html', array('product_name'        => $product->name,
                                                    'product_description' => $product->description,
                                                    'product_image_url'   => $product->image_url,
@@ -84,7 +84,8 @@ if (isset($_GET['login'])) {
     $product_list .= $product_page->html;
   }
   $page_vars['page_title'] = 'Search for \'' . $_GET['search'] . '\'';
-  $page_vars['product_list'] = $product_list;
+  $page_vars['query'] = $_GET['search'];
+  $page_vars['results'] = $product_list;
   $page = new Page('search.html', $page_vars);
 } elseif (isset($_GET['user'])) {
 	$purchase_list = '';
