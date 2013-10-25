@@ -24,5 +24,5 @@ respectively. Like so:
     $_SESSION['error'] = 'Invalid user credentials, please try again.';
 
 Next time a page is rendered (through index.php), the message will be prettily
-displayed then removed from that user's session variables. The templates the
-message runs through are `html/notice.html` and `html/error.html`.
+displayed then removed from that user's session variables. The pages the message
+displays via are `html/notice.html` and `html/error.html`.
