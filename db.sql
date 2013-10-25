@@ -67,7 +67,6 @@ CREATE TABLE `Purchase_Items` (
 
 LOCK TABLES `Purchase_Items` WRITE;
 /*!40000 ALTER TABLE `Purchase_Items` DISABLE KEYS */;
-INSERT INTO `Purchase_Items` VALUES (1,4),(1,6),(1,3),(2,3),(2,4),(2,1),(3,1),(3,5),(3,7),(4,2),(4,6),(5,7),(5,2),(6,7),(6,3),(7,2),(7,1),(7,6),(8,6),(8,4),(8,2),(8,1);
 /*!40000 ALTER TABLE `Purchase_Items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -85,7 +84,7 @@ CREATE TABLE `Purchases` (
   PRIMARY KEY (`purchase_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `Purchases_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,7 +93,6 @@ CREATE TABLE `Purchases` (
 
 LOCK TABLES `Purchases` WRITE;
 /*!40000 ALTER TABLE `Purchases` DISABLE KEYS */;
-INSERT INTO `Purchases` VALUES (1,5,'2013-10-05 14:34:11'),(2,4,'2013-10-02 18:24:50'),(3,3,'2013-10-03 22:45:11'),(4,6,'2013-10-01 15:22:55'),(5,4,'2013-09-22 18:35:06'),(6,3,'2013-09-23 22:20:23'),(7,6,'2013-09-22 18:55:04'),(8,5,'2013-09-25 17:32:24');
 /*!40000 ALTER TABLE `Purchases` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,7 +106,7 @@ DROP TABLE IF EXISTS `Users`;
 CREATE TABLE `Users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `username` char(30) NOT NULL,
-  `password_hash` char(50) NOT NULL,
+  `password_hash` varchar(200) NOT NULL,
   `is_admin` tinyint(1) NOT NULL,
   `gender` char(1) NOT NULL,
   `updated` datetime NOT NULL,
@@ -118,7 +116,7 @@ CREATE TABLE `Users` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_id` (`user_id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,7 +125,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (3,'admin@gmail.com','dL0GU02VpDZYE',1,'m','2013-10-01 04:43:02','What\'s my favorite color?','dLxWZkjhDSkFA','123 Testing Ave. Chico, CA, 95926'),(4,'frank@gmail.com','dL0GU02VpDZYE',0,'m','2013-09-17 15:21:44','What\'s my favorite color?','dLxWZkjhDSkFA','123 Testing Ave. Chico, CA, 95926'),(5,'melissa@gmail.com','dL0GU02VpDZYE',0,'f','2013-09-25 20:44:52','What\'s my favorite color?','dLxWZkjhDSkFA','123 Testing Ave. Chico, CA, 95926'),(6,'billy@gmail.com','dL0GU02VpDZYE',0,'m','2013-10-02 19:06:33','What\'s my favorite color?','dLxWZkjhDSkFA','123 Testing Ave. Chico, CA, 95926'),(17,'kyle@yahoo.com','dL0GU02VpDZYE',0,'m','2013-10-04 23:27:39','What\'s my favorite color?','dLxWZkjhDSkFA','123 Testing Ave. Chico, CA, 95926'),(18,'kyle@gmail.com','dL0GU02VpDZYE',0,'m','2013-10-04 23:29:46','What\'s my favorite color?','dLxWZkjhDSkFA','123 Testing Ave. Chico, CA, 95926'),(19,'news@gmail.com','dLcLxK.JyY3Bs',0,'f','2013-10-05 09:29:39','What\'s my favorite color?','dLxWZkjhDSkFA','123 Testing Ave. Chico, CA, 95926'),(20,'frank@yahoo.com','dL4jdgimBZrAs',0,'m','2013-10-07 17:07:50','What\'s my favorite color?','dLxWZkjhDSkFA','123 Testing Ave. Chico, CA, 95926'),(21,'testing@w.com','dL91GVrxNmo/o',0,'m','2013-10-07 17:49:11','What\'s my favorite color?','dLxWZkjhDSkFA','123 Testing Ave. Chico, CA, 95926'),(23,'nomadmtb@gmail.com','dL0GU02VpDZYE',0,'m','2013-10-07 22:12:08','What\'s my favorite color?','dLxWZkjhDSkFA','123 Testing Ave. Chico, CA, 95926'),(24,'franken@frank.com','dLPDrBkxGyN7I',0,'m','2013-10-08 14:47:58','What\'s my favorite color?','dLxWZkjhDSkFA','123 Testing Ave. Chico, CA, 95926'),(30,'zooguy@gmail.com','dLiOiZ5qz02gc',0,'f','2013-10-08 19:52:48','What my favorite animal?','dLsYEj5u8roOs','123 Zoo Road, Chico, CA 95926');
+INSERT INTO `Users` VALUES (40,'kluce@alpha.com','06a63361bb5aa5dc1feba2e7242a623d3147a5832811d93b97dfcd39b8ac1160',1,'m','2013-10-24 16:52:49','What is the reset code?','Az**$jk2261Lzx1990#','1325 Nord Ave. Chico, CA 95926'),(41,'scory@alpha.com','06a63361bb5aa5dc1feba2e7242a623d3147a5832811d93b97dfcd39b8ac1160',1,'m','2013-10-24 16:57:54','What is the reset code?','Team Alpha','1325 Nord Ave. Chico, CA 95926'),(42,'bcarlsson@alpha.com','06a63361bb5aa5dc1feba2e7242a623d3147a5832811d93b97dfcd39b8ac1160',1,'m','2013-10-24 16:58:39','What is the reset code?','Team Alpha','1325 Nord Ave. Chico, CA 95926'),(43,'akulkarni@alpha.com','06a63361bb5aa5dc1feba2e7242a623d3147a5832811d93b97dfcd39b8ac1160',1,'m','2013-10-24 16:59:08','What is the reset code?','Team Alpha','1325 Nord Ave. Chico, CA 95926');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -140,4 +138,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-08 19:54:08
+-- Dump completed on 2013-10-24 17:08:01

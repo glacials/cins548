@@ -7,11 +7,14 @@
 4.	DONE---Give admins the ability to edit all information that belongs to registered users.
 
 ## db.sql
-MOST sample accounts in this database dump contain the password 'password'.
-Each User object also contains two reset columns, question and answer.
-	For the sample accounts contained in the DB dump, the reset question
-	is encrypted with the same salt and algorithm as the passwords.
-	The answers to the reset questions are 'greenish'.
+	The default dump provided has these accounts already installed.
+
+		bcarlsson@alpha.com	=> pw: 'password'
+		akulkarni@alpha.com	=> pw: 'password'
+		scory@alpha.com		=> pw: 'password'
+		kluce@alpha.com		=> pw: 'password'
+
+	The password-reset answer for all of these accounts is 'Team Alpha'
 
 ## Notices and error messages
 To display a notice or an error message the next time a page is rendered to
