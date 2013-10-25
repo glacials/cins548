@@ -5,7 +5,7 @@ require_once 'autoload.php';
 // Setting variables...
 $username = $_POST['email'];
 $password = hash("sha256", $_POST['password'] . 'alPha548*3jasc');
-$password_confirm = hash("sha256", $_POST['password'] . 'alPha548*3jasc');
+$password_confirm = hash("sha256", $_POST['password_confirm'] . 'alPha548*3jasc');
 $gender = $_POST['gender'];
 $question = $_POST['question'];
 $answer = hash("sha256", $_POST['answer'] . 'alPha548*3jasc');
@@ -17,7 +17,7 @@ if (empty($username)         || empty($password) ||
     empty($question)	     || empty($answer)   ||
     empty($address)	     || $password != $password_confirm
    ) {
-  $_SESSION['error'] = 'All fields must be filled out.';
+  $_SESSION['error'] = 'All fields must be correctly filled out.';
   header('Location: ?signup');
 } else {
   // Create new User object with variables, initialize data.
