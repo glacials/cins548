@@ -129,9 +129,12 @@ if (isset($_GET['login'])) {
     header('Location: ?cart');
   }
   if (isset($_POST['remove_item'])) {
-    foreach ($_SESSION['cart'] as $key => $product)
-      if ($product == $db->get_item($_POST['product_id']))
+    foreach ($_SESSION['cart'] as $key => $product) {
+      if ($product == $db->get_item($_POST['product_id'])) {
         unset($_SESSION['cart'][$key]);
+        break;
+      }
+    }
     $_SESSION['notice'] = 'Item successfully removed from cart.';
     header('Location: ?cart');
   }
