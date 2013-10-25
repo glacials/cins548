@@ -34,7 +34,7 @@ $update_data = array('id' => $_POST['user_id'],
 # Making sure user isn't being bad and changing hidden field in the form.
 if ($_SESSION['user']->is_admin == 0 and ($_SESSION['user']->id != $_POST['id'])) {
 	$_SESSION['error'] = 'There was a problem updating your account.';
-	header('Location: ?alter_user');
+	header('Location: /?alter_user');
 } else {
 
 $user = $db->get_user($update_data['id']);
@@ -64,7 +64,7 @@ $new_obj = new User($update_data['id'], $update_data['username'], $update_data['
 # Check to see if username has already been taken, if they are updating it.
 if(!empty($_POST['username']) and $db->username_exists($new_obj->username)) {
 	$_SESSION['error'] = 'Email already exists. Sorry.';
-	header('Location: ?alter_user');
+	header('Location: /?alter_user');
 } else {
 	if($new_obj->save('update')) {
 		// Update Session data if regular user updates their own account.
@@ -74,10 +74,10 @@ if(!empty($_POST['username']) and $db->username_exists($new_obj->username)) {
 			$_SESSION['user'] = $db->get_user($_SESSION['user']->id);
 		}
 		$_SESSION['notice'] = 'Account successfully updated.';
-		header('Location: ?user');
+		header('Location: /?user');
 	} else {
 		$_SESSION['error'] = 'There was a problem updating your account.';
-		header('Location: ?user');
+		header('Location: /?user');
 	}
 }
 }

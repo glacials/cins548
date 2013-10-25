@@ -111,7 +111,7 @@ CREATE TABLE `Users` (
   `gender` char(1) NOT NULL,
   `updated` datetime NOT NULL,
   `reset_question` varchar(100) NOT NULL,
-  `reset_answer` varchar(50) NOT NULL,
+  `reset_answer` varchar(200) NOT NULL,
   `address` varchar(100) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_id` (`user_id`),
@@ -125,7 +125,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (40,'kluce@alpha.com','06a63361bb5aa5dc1feba2e7242a623d3147a5832811d93b97dfcd39b8ac1160',1,'m','2013-10-24 16:52:49','What is the reset code?','Az**$jk2261Lzx1990#','1325 Nord Ave. Chico, CA 95926'),(41,'scory@alpha.com','06a63361bb5aa5dc1feba2e7242a623d3147a5832811d93b97dfcd39b8ac1160',1,'m','2013-10-24 16:57:54','What is the reset code?','Team Alpha','1325 Nord Ave. Chico, CA 95926'),(42,'bcarlsson@alpha.com','06a63361bb5aa5dc1feba2e7242a623d3147a5832811d93b97dfcd39b8ac1160',1,'m','2013-10-24 16:58:39','What is the reset code?','Team Alpha','1325 Nord Ave. Chico, CA 95926'),(43,'akulkarni@alpha.com','06a63361bb5aa5dc1feba2e7242a623d3147a5832811d93b97dfcd39b8ac1160',1,'m','2013-10-24 16:59:08','What is the reset code?','Team Alpha','1325 Nord Ave. Chico, CA 95926');
+INSERT INTO `Users` VALUES (40,'kluce@alpha.com','06a63361bb5aa5dc1feba2e7242a623d3147a5832811d93b97dfcd39b8ac1160',1,'m','2013-10-24 16:52:49','What is the reset code?','2bafaceccb195ed7e083989d5a9b13fa983c541bff8d9787a30b59bb6a13cc46','1325 Nord Ave. Chico, CA 95926'),(41,'scory@alpha.com','06a63361bb5aa5dc1feba2e7242a623d3147a5832811d93b97dfcd39b8ac1160',1,'m','2013-10-24 16:57:54','What is the reset code?','2bafaceccb195ed7e083989d5a9b13fa983c541bff8d9787a30b59bb6a13cc46','1325 Nord Ave. Chico, CA 95926'),(42,'bcarlsson@alpha.com','06a63361bb5aa5dc1feba2e7242a623d3147a5832811d93b97dfcd39b8ac1160',1,'m','2013-10-24 16:58:39','What is the reset code?','2bafaceccb195ed7e083989d5a9b13fa983c541bff8d9787a30b59bb6a13cc46','1325 Nord Ave. Chico, CA 95926'),(43,'akulkarni@alpha.com','06a63361bb5aa5dc1feba2e7242a623d3147a5832811d93b97dfcd39b8ac1160',1,'m','2013-10-24 16:59:08','What is the reset code?','2bafaceccb195ed7e083989d5a9b13fa983c541bff8d9787a30b59bb6a13cc46','1325 Nord Ave. Chico, CA 95926');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -138,4 +138,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-24 17:08:01
+-- Dump completed on 2013-10-25  0:15:19
