@@ -67,7 +67,7 @@ if (isset($_GET['login'])) {
     $product_page = new Page('product.html', array('product_id'          => $product->id,
                                                    'product_name'        => $product->name,
                                                    'product_description' => $product->description,
-                                                   'product_img'         => $product->image_url,
+                                                   'product_image_url'   => $product->image_url,
                                                    'product_price'       => $product->price), false);
     $product_list .= $product_page->html;
   }
