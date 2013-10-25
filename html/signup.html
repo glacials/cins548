@@ -1,45 +1,44 @@
-<div class="col-md-6">
+<div class="page-header">
   <h1>Sign up</h1>
+</div>
+<div class="col-md-8">
   <form class="form-horizontal" role="form" method="post" action="?signup" name="signup_form">
     <div class="form-group">
-      <label for="inputEmail1" class="col-lg-2 control-label input-lg">Email</label>
-      <div class="col-lg-10">
-        <input type="email" class="form-control input-lg" id="inputEmail1" placeholder="Email" name="email">
+      <label for="inputEmail1" class="col-md-4 control-label input-lg">Email</label>
+      <div class="col-md-8">
+        <input type="email" class="form-control input-lg" id="inputEmail1" placeholder="Email" name="email" autofocus>
       </div>
     </div>
     <div class="form-group">
-      <label for="inputPassword1" class="col-lg-2 control-label">Password</label>
-      <div class="col-lg-10">
+      <label for="inputPassword1" class="col-md-4 control-label">Password</label>
+      <div class="col-md-4">
         <input type="password" class="form-control" id="inputPassword1" placeholder="Password" name="password">
       </div>
-    </div>
-    <div class="form-group">
-      <label for="inputPassword1" class="col-lg-2 control-label">Confirm</label>
-      <div class="col-lg-10">
+      <div class="col-md-4">
         <input type="password" class="form-control" id="inputPassword1" placeholder="Confirm password" name="password_confirm">
       </div>
     </div>
     <div class="form-group">
-      <label for="inputaddress1" class="col-lg-2 control-label">Full Billing Address</label>
-      <div class="col-lg-10">
+      <label for="inputaddress1" class="col-md-4 control-label">Full Billing Address</label>
+      <div class="col-md-8">
         <input type="text" class="form-control" id="inputaddress1" placeholder="400 W First Street, Chico, CA 95929" name="address">
       </div>
     </div>
     <div class="form-group">
-      <label for="inputquestion1" class="col-lg-2 control-label">Password-Reset Question</label>
-      <div class="col-lg-10">
+      <label for="inputquestion1" class="col-md-4 control-label">Password-Reset Question</label>
+      <div class="col-md-8">
         <input type="text" class="form-control" id="inputquestion1" placeholder="What is my favorite color?" name="question">
       </div>
     </div>
     <div class="form-group">
-      <label for="inputquestion1" class="col-lg-2 control-label">Password-Reset Answer</label>
-      <div class="col-lg-10">
+      <label for="inputquestion1" class="col-md-4 control-label">Password-Reset Answer</label>
+      <div class="col-md-8">
         <input type="text" class="form-control" id="inputquestion1" placeholder="Green" name="answer">
       </div>
     </div>
     <div class="form-group">
-      <label for="sex_radio" class="col-lg-2 control-label">Gender</label>
-      <div class="col-lg-10">
+      <label for="sex_radio" class="col-md-4 control-label">Gender</label>
+      <div class="col-md-8">
         <div class="radio">
           <label class="radio-inline">
             <input type="radio" name="gender" value="m" checked> Male
@@ -53,12 +52,9 @@
       </div>
     </div>
     <div class="form-group">
-      <div class="col-lg-offset-2 col-lg-10">
+      <div class="col-lg-offset-2 col-md-8">
         <button type="submit" class="btn btn-default">Sign up</button>
       </div>
     </div>
   </form>
 </div>
-<script type="text/javascript" language="JavaScript">
-  document.forms['signup_form'].elements['email'].focus();
-</script>

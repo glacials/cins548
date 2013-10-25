@@ -1,10 +1,12 @@
-<div class="col-md-6">
+<div class="page-header">
   <h1>Log in</h1>
+</div>
+<div class="col-md-6">
   <form class="form-horizontal" role="form" method="post" action="?login" name="login_form">
     <div class="form-group">
       <label for="inputEmail1" class="col-lg-2 control-label input-lg">Email</label>
       <div class="col-lg-10">
-        <input type="email" class="form-control input-lg" id="inputEmail1" placeholder="Email" name="email">
+        <input type="email" class="form-control input-lg" id="inputEmail1" placeholder="Email" name="email" autofocus>
       </div>
     </div>
     <div class="form-group">
@@ -30,6 +32,3 @@
     </div>
   </form>
 </div>
-<script type="text/javascript" language="JavaScript">
-  document.forms['login_form'].elements['email'].focus();
-</script>

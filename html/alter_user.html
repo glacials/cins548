@@ -1,44 +1,45 @@
-<div class="col-md-6">
-<h1>{page_title}</h1>
-<h3>{username}</h3>
-<br>
-<br>
-<p>*Only update the fields that you wish to update*</p>
+<div class="page-header">
+  <h1>
+    {page_title} <small>{username}</small>
+</h1>
+</div>
+<div class="col-md-8">
+  <div class="alert alert-info"><b>Heads up!</b> Only update the fields that need to change.</div>
   <form class="form-horizontal" role="form" method="post" action="alter_user.php" name="alter_user">
     <div class="form-group">
-      <label for="inputEmail1" class="col-lg-2 control-label input-lg">Email</label>
-      <div class="col-lg-10">
-	      <input type="email" class="form-control input-lg" id="inputEmail1" placeholder="{username}" name="email">
+      <label for="inputEmail1" class="col-md-4 control-label input-lg">Email</label>
+      <div class="col-md-8">
+        <input type="email" class="form-control input-lg" id="inputEmail1" placeholder="{username}" name="email" autofocus>
       </div>
     </div>
     <div class="form-group">
-      <label for="inputPassword1" class="col-lg-2 control-label">Password</label>
-      <div class="col-lg-10">
+      <label for="inputPassword1" class="col-md-4 control-label">Password</label>
+      <div class="col-md-8">
         <input type="password" class="form-control" id="inputPassword1" placeholder="************" name="password">
       </div>
     </div>
     <div class="form-group">
-      <label for="inputaddress1" class="col-lg-2 control-label">Full Billing Address</label>
-      <div class="col-lg-10">
-	      <input type="text" class="form-control" id="inputaddress1" placeholder="{address}" name="address">
+      <label for="inputaddress1" class="col-md-4 control-label">Full Billing Address</label>
+      <div class="col-md-8">
+        <input type="text" class="form-control" id="inputaddress1" placeholder="{address}" name="address">
       </div>
     </div>
     <div class="form-group">
-      <label for="inputquestion1" class="col-lg-2 control-label">Password-Reset Question</label>
-      <div class="col-lg-10">
-	      <input type="text" class="form-control" id="inputquestion1" placeholder="{reset_question}" name="question">
+      <label for="inputquestion1" class="col-md-4 control-label">Password-Reset Question</label>
+      <div class="col-md-8">
+        <input type="text" class="form-control" id="inputquestion1" placeholder="{reset_question}" name="question">
       </div>
     </div>
     <input type="hidden" name="user_id" value="{user_id}">
     <div class="form-group">
-      <label for="inputquestion1" class="col-lg-2 control-label">Password-Reset Answer</label>
-      <div class="col-lg-10">
+      <label for="inputquestion1" class="col-md-4 control-label">Password-Reset Answer</label>
+      <div class="col-md-8">
         <input type="text" class="form-control" id="inputquestion1" placeholder="************" name="answer">
       </div>
     </div>
     <div class="form-group">
-      <label for="sex_radio" class="col-lg-2 control-label">Gender</label>
-      <div class="col-lg-10">
+      <label for="sex_radio" class="col-md-4 control-label">Gender</label>
+      <div class="col-md-8">
         <div class="radio">
           <label class="radio-inline">
             <input type="radio" name="gender" value="m" checked> Male
@@ -52,12 +53,9 @@
       </div>
     </div>
     <div class="form-group">
-      <div class="col-lg-offset-2 col-lg-10">
+      <div class="col-lg-offset-2 col-md-8">
         <button type="submit" class="btn btn-default">Update</button>
       </div>
     </div>
   </form>
 </div>
-<script type="text/javascript" language="JavaScript">
-  document.forms['signup_form'].elements['email'].focus();
-</script>

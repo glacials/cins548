@@ -1,40 +1,43 @@
-<h1>{page_title}: {user_email}</h1>
-<br>
+<div class="page-header">
+  <h1>
+    {user_email}
+    <small><a class="btn btn-default pull-right" href="?alter_user"><div class="glyphicon glyphicon-pencil"></div> Edit</a></small>
+  </h1>
+</div>
 
 <div class="col-md-8">
-	<h3>User Infomation</h3>
-	<table class="table table-bordered">
-		<tr>
-			<th>Username</th>
-			<td>{user_email}</td>
-		</tr>
-		<tr>
-			<th>Address</th>
-			<td>{address}</td>
-		</tr>
-		<tr>
-			<th>Reset Question</th>
-			<td>{reset_question}</td>
-		</tr>
-		<tr>
-			<th>Gender</th>
-			<td>{gender}</td>
-		</tr>
-		<tr>
-			<th>Last Updated</th>
-			<td>{updated}</td>
-	</table>
-	<a class="btn btn-default" href="?alter_user">Update Information?</a>
-	<br>
-	<br>
-	<br>
-
-	<h3>Purchase History</h3>
-	<table class="table table-striped">
-		<tr>
-			<th>Purchase ID#</th>
-			<th>Item</th>
-			<th>Date Purchased</th>
-		</tr>
-		{purchase_list}
-	</table>
+  <h3>User Infomation</h3>
+  <table class="table table-bordered">
+    <tr>
+      <th>Username</th>
+      <td>{user_email}</td>
+    </tr>
+    <tr>
+      <th>Address</th>
+      <td>{address}</td>
+    </tr>
+    <tr>
+      <th>Reset Question</th>
+      <td>{reset_question}</td>
+    </tr>
+    <tr>
+      <th>Gender</th>
+      <td>{gender}</td>
+    </tr>
+    <tr>
+      <th>Last Updated</th>
+      <td>{updated}</td>
+    </tr>
+  </table>
+</div>
+<div class="col-md-8">
+  <h3>Purchase History</h3>
+  <table class="table table-striped">
+    <tr>
+      <th>Purchase ID#</th>
+      <th>Item</th>
+      <th>Date Purchased</th>
+    </tr>
+    {purchase_list}
+  </table>
+</div>
