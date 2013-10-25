@@ -216,7 +216,7 @@ class Database {
    * user_id if valid, and FALSE if invalid.
    */
   public function verify_creds($username, $password) {
-    $password = crypt($password, 'dLp#32A');
+    $password = hash("sha256",$password . 'alPha548*3jasc');
     $statement = $this->connection->prepare('SELECT user_id FROM Users WHERE username=? AND password_hash=?');
 
     $statement->bind_param('ss', $username, $password);
