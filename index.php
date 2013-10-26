@@ -84,7 +84,7 @@ if (isset($_GET['login'])) {
     $product_list .= $product_page->html;
   }
   $page_vars['page_title'] = 'Search for \'' . $_GET['search'] . '\'';
-  $page_vars['query'] = $_GET['search'];
+  $page_vars['query'] = htmlspecialchars($_GET['search'], ENT_QUOTES);
   $page_vars['results'] = $product_list;
   $page = new Page('search.html', $page_vars);
 } elseif (isset($_GET['user'])) {
