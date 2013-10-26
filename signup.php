@@ -23,10 +23,10 @@ if (empty($username)         || empty($password) ||
   header('Location: ?signup');
    } else {
 	   if ((strlen($username) > 30) ||
-	       (strlen($password) > 50) ||
+	       (strlen($password) > 64) ||
 	       (strlen($gender) > 1)    ||
 	       (strlen($question) > 100)||
-	       (strlen($answer) > 50)   ||
+	       (strlen($answer) > 64)   ||
 	       (strlen($address) > 100)) {
 		       $_SESSION['error'] = 'One or more input fields are too long.';
 		       header('Location: ?signup');
