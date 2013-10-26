@@ -27,7 +27,7 @@ $page_vars['cart_size'] = count($_SESSION['cart']);
 
 if (isset($_SESSION['user'])) {
   $page_vars['rightnav_url_1'] = '?user';
-  $page_vars['rightnav_text_1'] = $_SESSION['user']->username;
+  $page_vars['rightnav_text_1'] = htmlspecialchars($_SESSION['user']->username, ENT_QUOTES);
   $page_vars['rightnav_url_2'] = '?logout';
   $page_vars['rightnav_text_2'] = 'Log out';
   if ($_SESSION['user']->is_admin) {
