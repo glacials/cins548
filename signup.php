@@ -11,7 +11,10 @@ $question = $_POST['question'];
 $answer = hash("sha256", $_POST['answer'] . 'alPha548*3jasc');
 $address = $_POST['address'];
 
-
+if (strlen($_POST['password']) < 8) {
+	$_SESSION['error'] = 'Password must be longer than 7 characters';
+	header('Location: /?signup');
+} else {
 
 // Redirect back to signup page if any of the fields are empty, or if the passwords don't match each other.
 if (empty($username)         || empty($password) ||
@@ -43,4 +46,5 @@ if (empty($username)         || empty($password) ||
   			}
 	       	}
    }
+}
 ?>
