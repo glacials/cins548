@@ -15,6 +15,11 @@ if (strlen($_POST['password']) < 8) {
 	$_SESSION['error'] = 'Password must be longer than 7 characters';
 	header('Location: /?signup');
 } else {
+	if ($gender != 'm' || $gender != 'f') {
+		$_SESSION['error'] = 'Invalid gender, please try again.';
+		header('Location: /?signup');
+		exit();
+	} else {
 
 // Redirect back to signup page if any of the fields are empty, or if the passwords don't match each other.
 if (empty($username)         || empty($password) ||
@@ -46,5 +51,6 @@ if (empty($username)         || empty($password) ||
   			}
 	       	}
    }
+	}
 }
 ?>
