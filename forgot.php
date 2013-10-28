@@ -23,6 +23,6 @@ if($forgotten_user != false) {
 	header('Location: /?reset_challenge');
 }
 else {
-	$_SESSION['error'] = 'Error, retrieving account details';
+	$_SESSION['error'] = 'Error retrieving account details';
 	header('Location: /?forgot');
 }
