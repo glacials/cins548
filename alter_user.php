@@ -50,7 +50,7 @@ if (!empty($_POST['password'])) {
 	}
 }
 
-if (!empty($_POST['gender']) and (($_POST['gender'] != 'w') || ($_POST['gender'] != 'm'))) {
+if (!empty($_POST['gender']) and (($_POST['gender'] != 'f') and ($_POST['gender'] != 'm'))) {
 	$_SESSION['error'] = 'Invalid gender, try again';
 	header('Location: /?alter_user');
 	exit();
