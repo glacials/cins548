@@ -50,6 +50,12 @@ if (!empty($_POST['password'])) {
 	}
 }
 
+if (!empty($_POST['gender']) and (($_POST['gender'] != 'w') || ($_POST['gender'] != 'm'))) {
+	$_SESSION['error'] = 'Invalid gender, try again';
+	header('Location: /?alter_user');
+	exit();
+}
+
 # Handling if reset_answer is going to be updated.
 if (!empty($_POST['answer'])) {
 	$update_data['reset_answer'] = hash("sha256",$_POST['answer'] . 'alPha548*3jasc');
